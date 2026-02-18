@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Kelvin Edimeh</title>
+    <!-- Fonts: Syne (Headings) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-left">
+            <span>LAGOS <span id="time-display">00:00</span></span>
+        </div>
+
+        <div class="nav-center stacked">
+            <a href="/index.html" class="logo">Kelvin Edimeh</a>
+            <div class="nav-links-sub">
+                <a href="/work.html">WORK</a>
+                <a href="/about.html">ABOUT</a>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <a href="mailto:kelvinedimeh@gmail.com" class="btn-contact">Let's Talk &rarr;</a>
+            <button class="hamburger-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <button class="menu-close-btn" aria-label="Close Menu">&times;</button>
+        <nav class="mobile-nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/work.html">Work</a>
+            <a href="/about.html">About</a>
+            <a href="/contact.html">Let's Talk</a>
+        </nav>
+    </div>>
+
+    <main class="contact-page">
+
+        <div class="contact-split">
+            <!-- Left: Form -->
+            <div class="contact-left">
+                <h1 class="reveal-text">SAY HI!</h1>
+                <p class="reveal-text sub-text">SINCE I’M IN LAGOS RIGHT NOW, EVEN MY TEXT MESSAGES MIGHT SHOW UP
+                    FASHIONABLY LATE ;)</p>
+
+                <p class="reveal-text direct-link">FILL OUT THIS FORM OR EMAIL ME AT <a
+                        href="mailto:kelvinedimeh@gmail.com">KELVINEDIMEH@GMAIL.COM</a></p>
+
+                <form class="bdun-form reveal-text" action="https://formspree.io/f/xrealoqv" method="POST"
+                    id="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="YOUR NAME OR COMPANY NAME" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="E-MAIL" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="MESSAGE" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">SEND IT!</button>
+                    <p id="form-status"
+                        style="display:none; margin-top:1rem; font-weight:700; color:var(--accent); text-transform:uppercase;">
+                    </p>
+                </form>
+            </div>
+
+            <!-- Right: Visual -->
+            <div class="contact-right reveal-text">
+                <img src="/images/contact.gif" alt="Contact Visual" class="contact-visual">
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bdun Style Footer Grid -->
+    <footer class="contact-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="col-label">SOCIAL</div>
+                <div class="col-links">
+                    <a href="https://www.linkedin.com/in/tobechukwuedimeh" target="_blank">LINKEDIN ↗</a>
+                    <a href="https://www.behance.net/edimehkelvin" target="_blank">BEHANCE ↗</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <div class="col-label">CURRENT LOCATION</div>
+                <div>LAGOS, NIGERIA</div>
+            </div>
+
+            <div class="footer-col">
+                <div class="col-label">PHONE</div>
+                <div>+234 810 294 9098</div>
+            </div>
+
+            <div class="footer-col">
+                <div class="col-label">EMAIL</div>
+                <a href="mailto:kelvinedimeh@gmail.com">KELVINEDIMEH@GMAIL.COM</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="bot-left">© 2026 KELVIN EDIMEH</div>
+            <div class="bot-right" onclick="window.scrollTo(0,0)" style="cursor: pointer;">GO BACK TO TOP</div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
