@@ -5,31 +5,31 @@
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.kelvinedimeh.me/work.html</loc>
+        <loc>https://www.kelvinedimeh.me/work</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.kelvinedimeh.me/about.html</loc>
+        <loc>https://www.kelvinedimeh.me/about</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.kelvinedimeh.me/contact.html</loc>
+        <loc>https://www.kelvinedimeh.me/contact</loc>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://www.kelvinedimeh.me/rentboss.html</loc>
+        <loc>https://www.kelvinedimeh.me/rentboss</loc>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.kelvinedimeh.me/lumenone.html</loc>
+        <loc>https://www.kelvinedimeh.me/lumenone</loc>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.kelvinedimeh.me/swittea.html</loc>
+        <loc>https://www.kelvinedimeh.me/swittea</loc>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://www.kelvinedimeh.me/kml.html</loc>
+        <loc>https://www.kelvinedimeh.me/kml</loc>
         <priority>0.6</priority>
     </url>
 </urlset>
