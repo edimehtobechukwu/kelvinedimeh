@@ -192,8 +192,12 @@ img {
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: var(--nav-height) 5% 5vh;
+    padding: var(--nav-height) 12% 5vh;
+    /* Increased from 5% to 12% to prevent edge touching */
     text-align: center;
+    max-width: 100%;
+    overflow-x: hidden;
+    /* Safety */
 }
 
 .hero-center h1 {
