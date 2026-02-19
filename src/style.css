@@ -1256,15 +1256,17 @@ textarea,
     /* Hero Typography Fixes */
     /* Hero Typography Fixes */
     .hero-bdun h1 {
-        font-size: 3rem !important;
-        line-height: 1;
+        font-size: 2.2rem !important;
+        /* Reduced from 3rem */
+        line-height: 1.1;
         word-wrap: break-word;
         hyphens: auto;
     }
 
     .about-hero h1 {
-        font-size: 3rem;
-        line-height: 1;
+        font-size: 2.2rem;
+        /* Reduced from 3rem */
+        line-height: 1.1;
     }
 
     .about-hero p {
@@ -1294,8 +1296,20 @@ textarea,
     }
 
     .logo {
-        /* Ensure font size is good */
-        font-size: 1.4rem;
+        /* Hide full text on mobile */
+        font-size: 0 !important;
+        /* Ensure font size is reset for pseudo */
+    }
+
+    .logo:before {
+        content: "KE";
+        font-size: 1.5rem;
+        /* Visible size */
+        color: #fff;
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        /* Ensure correct positioning */
+        display: inline-block;
     }
 
     .nav-right {
