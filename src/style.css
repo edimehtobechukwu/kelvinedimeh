@@ -1570,7 +1570,8 @@ textarea,
 .philosophy-text strong {
     color: #2de2e6;
     /* Accent color */
-    font-weight: 700;
+    font-weight: inherit;
+    /* Match surrounding text weight (500) */
 }
 
 .philosophy-grid {
