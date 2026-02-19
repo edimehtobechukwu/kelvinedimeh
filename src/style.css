@@ -1524,3 +1524,58 @@ textarea,
         aspect-ratio: 16/9;
     }
 }
+
+/* Philosophy Section (SEO & Content) */
+.philosophy-section {
+    padding: 6rem 5%;
+    background-color: #050505;
+    /* Ensuring dark bg matches var */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.philosophy-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.philosophy-text {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-family: 'Syne', sans-serif;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #fff;
+    margin-bottom: 4rem;
+    max-width: 900px;
+}
+
+.philosophy-text strong {
+    color: #2de2e6;
+    /* Accent color */
+    font-weight: 700;
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+.p-item h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.p-item p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #888;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .philosophy-section {
+        padding: 4rem 5%;
+    }
+}
