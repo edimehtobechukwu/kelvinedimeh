@@ -1433,11 +1433,17 @@ textarea,
     }
 
     .hero-center h1 {
-        font-size: clamp(1.5rem, 8vw, 2.5rem);
-        /* Responsive sizing: shrinks on small screens */
+        font-size: clamp(1.2rem, 6vw, 2.5rem);
+        /* Reduced to 6vw to fit "EXPERIENCES" */
         overflow-wrap: break-word;
-        /* Prevent overflow */
         line-height: 1.1;
+        width: 100%;
+    }
+
+    /* Hide Custom Cursor on Mobile */
+    .cursor,
+    .cursor-follower {
+        display: none !important;
     }
 
     .bento-item {
