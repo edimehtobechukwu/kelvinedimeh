@@ -1,13 +1,7 @@
 import './style.css'
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import './style.css'
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis'
-import { inject } from '@vercel/analytics';
-
-inject();
 
 gsap.registerPlugin(ScrollTrigger);
 
