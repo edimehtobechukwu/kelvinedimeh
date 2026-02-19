@@ -1423,13 +1423,17 @@ textarea,
     }
 
     .hero-bdun {
-        padding-left: 8%;
-        padding-right: 8%;
+        padding-left: 10%;
+        /* Increased padding */
+        padding-right: 10%;
     }
 
     .hero-center h1 {
-        font-size: 2.5rem;
-        /* Smaller for mobile to center better */
+        font-size: clamp(1.5rem, 8vw, 2.5rem);
+        /* Responsive sizing: shrinks on small screens */
+        overflow-wrap: break-word;
+        /* Prevent overflow */
+        line-height: 1.1;
     }
 
     .bento-item {
