@@ -4,9 +4,9 @@
     --surface: #101010;
     --text: #f4f4f5;
     --text-muted: #a1a1aa;
-    --accent: #ff2a2a;
-    /* Vibrant Red */
-    --accent-glow: rgba(255, 42, 42, 0.2);
+    --accent: #ff4a5a;
+    /* Coral / Pinkish Red */
+    --accent-glow: rgba(255, 74, 90, 0.2);
 
     --font-head: 'Syne', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -1622,8 +1622,8 @@ textarea,
 }
 
 .philosophy-text strong {
-    color: #2de2e6;
-    /* Accent color */
+    color: var(--accent);
+    /* Softened Pink/Red Accent Color */
     font-weight: inherit;
     /* Match surrounding text weight (500) */
 }
