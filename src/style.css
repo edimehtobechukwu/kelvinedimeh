@@ -1579,15 +1579,13 @@ textarea,
     background: center/cover;
 }
 
-/* Bento Grid Styles */
+/* Masonry Brick Work Grid */
 .about-fun-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    column-count: 3;
+    column-gap: 1.5rem;
     padding: 5vh 5%;
     max-width: var(--container);
     margin: 0 auto;
-    grid-auto-flow: dense;
 }
 
 .bento-item {
@@ -1595,39 +1593,40 @@ textarea,
     border-radius: 4px;
     overflow: hidden;
     position: relative;
-    aspect-ratio: 16/9;
+    margin-bottom: 1.5rem;
+    break-inside: avoid;
+    display: inline-block;
+    width: 100%;
 }
 
 .bento-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
     transition: transform 0.5s ease;
 }
 
 .bento-item:hover img {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
-/* Irregular Spans for Bento Effect */
+/* Remove Irregular Spans for Masonry */
 .item-1,
 .item-5,
 .item-9 {
-    grid-column: span 2;
-    aspect-ratio: 16/9;
-    /* Enforce ratio to prevent layout breakage */
+    grid-column: unset;
+    aspect-ratio: unset;
+}
+
+@media (max-width: 1024px) {
+    .about-fun-grid {
+        column-count: 2;
+    }
 }
 
 @media (max-width: 768px) {
     .about-fun-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .item-1,
-    .item-5,
-    .item-9 {
-        grid-column: span 1;
-        aspect-ratio: 16/9;
+        column-count: 1;
     }
 }
 
