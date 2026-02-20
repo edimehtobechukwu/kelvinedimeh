@@ -268,7 +268,7 @@ img {
 
 .about-hero h1 {
     font-family: var(--font-head);
-    font-size: clamp(1.2rem, 6.5vw, 4.5rem);
+    font-size: clamp(1rem, 6vw, 4.5rem);
     font-weight: 800;
     line-height: 1.1;
     text-transform: uppercase;
@@ -1300,8 +1300,8 @@ textarea,
     }
 
     .about-hero h1 {
-        font-size: clamp(0.9rem, 10vw, 2.2rem);
-        /* Scale to fit without wrapping */
+        font-size: clamp(0.7rem, 9vw, 2.2rem);
+        /* Scale to fit narrowest screens without wrapping */
         line-height: 1.1;
         white-space: nowrap;
     }
