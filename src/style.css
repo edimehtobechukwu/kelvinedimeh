@@ -1300,7 +1300,7 @@ textarea,
     }
 
     .about-hero h1 {
-        font-size: clamp(0.7rem, 9vw, 2.2rem);
+        font-size: clamp(0.5rem, 7.5vw, 2.2rem);
         /* Scale to fit narrowest screens without wrapping */
         line-height: 1.1;
         white-space: nowrap;
