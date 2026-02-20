@@ -196,4 +196,12 @@ if (hamburger && mobileMenu) {
     }
 }
 
+// 6. Scroll to Top
+const scrollToTopBtns = document.querySelectorAll('.scroll-to-top-btn');
+scrollToTopBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    });
+});
+
 console.log('Portfolio initialized.');

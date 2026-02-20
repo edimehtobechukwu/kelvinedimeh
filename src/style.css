@@ -1395,12 +1395,16 @@ textarea,
         align-items: center;
         justify-content: center;
         opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
         pointer-events: none;
-        transition: opacity 0.3s;
+        transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
     }
 
     .mobile-menu.active {
         opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
         pointer-events: auto;
     }
 
