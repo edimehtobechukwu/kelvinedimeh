@@ -255,6 +255,36 @@ img {
     border-bottom-left-radius: 4px;
 }
 
+/* About Hero */
+.about-hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: var(--nav-height) 5% 5vh;
+}
+
+.about-hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+}
+
+.about-hero p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    max-width: 700px;
+    margin: 0 auto;
+    text-transform: uppercase;
+}
+
 .w-logo {
     font-weight: 800;
     font-size: 1.2rem;
