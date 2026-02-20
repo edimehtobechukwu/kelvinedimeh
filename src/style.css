@@ -286,6 +286,14 @@ img {
     text-transform: uppercase;
 }
 
+.mobile-text {
+    display: none;
+}
+
+.desktop-text {
+    display: block;
+}
+
 .w-logo {
     font-weight: 800;
     font-size: 1.2rem;
@@ -1300,10 +1308,18 @@ textarea,
     }
 
     .about-hero h1 {
-        font-size: clamp(0.5rem, 7.5vw, 2.2rem);
-        /* Scale to fit narrowest screens without wrapping */
+        font-size: clamp(2rem, 10vw, 3rem);
+        /* Safe to increase size now that we have granular mobile break points */
         line-height: 1.1;
         white-space: nowrap;
+    }
+
+    .desktop-text {
+        display: none !important;
+    }
+
+    .mobile-text {
+        display: block !important;
     }
 
     .about-hero p {
