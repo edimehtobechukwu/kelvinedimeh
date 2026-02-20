@@ -274,7 +274,6 @@ img {
     text-transform: uppercase;
     margin-bottom: 2rem;
     letter-spacing: -0.02em;
-    white-space: nowrap;
 }
 
 .about-hero p {
@@ -1284,8 +1283,7 @@ textarea,
 }
 
 /* Mobile Optimizations */
-/* Mobile Optimizations */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     section {
         padding: 8vh 5%;
         /* Reduce vertical padding */
@@ -1308,10 +1306,8 @@ textarea,
     }
 
     .about-hero h1 {
-        font-size: clamp(2rem, 10vw, 3rem);
-        /* Safe to increase size now that we have granular mobile break points */
+        font-size: clamp(0.5rem, 7.5vw, 2.2rem);
         line-height: 1.1;
-        white-space: nowrap;
     }
 
     .desktop-text {
