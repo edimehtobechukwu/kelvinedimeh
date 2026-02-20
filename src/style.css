@@ -586,12 +586,31 @@ img {
     display: block;
 }
 
-/* Footer Grid Specific to Contact Page */
-.contact-footer {
-    border-top: none;
-    /* Already bordered by split */
+/* Global "Bdun" Style Grid Footer */
+.bdun-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
 }
+
+.footer-cta {
+    padding: 10rem 5% 5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-cta h2 {
+    font-family: var(--font-head);
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    color: #fff;
+}
+
 
 .footer-grid {
     display: grid;
