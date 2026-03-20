@@ -2,8 +2,10 @@ import './style.css'
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis'
+import { initCMS } from './cms';
 
 gsap.registerPlugin(ScrollTrigger);
+initCMS();
 
 // Contact Form Handler (Formspree AJAX)
 const contactForm = document.getElementById('contact-form') as HTMLFormElement;

@@ -1,0 +1,141 @@
+/* Case Study Layout Overrides */
+
+/* Case Study Clean Styles */
+.cs-hero-clean {
+    padding-top: 15vh;
+    padding-bottom: 2vh;
+}
+
+.cs-container-clean {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.cs-category-clean {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.cs-title-clean {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.cs-info-grid-clean {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    border-top: 1px solid #333;
+    padding-top: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.cs-label-clean {
+    font-size: 0.65rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+.cs-value-clean {
+    font-size: 0.9rem;
+    color: #eee;
+    font-weight: 500;
+}
+
+.cs-hero-img-clean {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 5rem;
+    object-fit: cover;
+}
+
+/* Split Content Content */
+.cs-content-clean {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 5% 5rem;
+}
+
+.content-split-clean {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.cs-section-title-clean {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 0;
+}
+
+.cs-text-clean {
+    font-size: 0.95rem;
+    color: #aaa;
+    line-height: 1.7;
+}
+
+.cs-list-clean {
+    font-size: 0.95rem;
+    color: #aaa;
+    line-height: 1.7;
+    padding-left: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+/* Horizontal Gallery */
+.cs-gallery-clean {
+    padding: 0 5% 5rem;
+    max-width: 100%;
+}
+
+.gallery-grid-clean {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    scrollbar-width: none; /* Firefox */
+}
+.gallery-grid-clean::-webkit-scrollbar { 
+    display: none; /* Chrome/Safari */
+}
+
+.gallery-item-clean {
+    flex: 0 0 320px;
+    background: #111;
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item-clean img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 768px) {
+    .content-split-clean {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .cs-info-grid-clean {
+        gap: 2rem;
+    }
+}

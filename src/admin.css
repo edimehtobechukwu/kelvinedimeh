@@ -1,0 +1,560 @@
+/* Admin specific overrides */
+body.admin-body {
+    background: #0a0a0a;
+    color: #e5e5e5;
+    margin: 0;
+    padding: 0;
+    /* Prevent interference from style.css body padding/limits */
+    max-width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Login Screen */
+.admin-login-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #050505;
+}
+
+.login-box {
+    background: #111;
+    padding: 3rem;
+    border-radius: 12px;
+    border: 1px solid #222;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.login-box h2 {
+    font-family: 'Syne', sans-serif;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+}
+
+.login-box p {
+    color: #888;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 1rem;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.login-box input:focus {
+    border-color: #ff4a5a;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 1rem;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-box button:hover {
+    background: #ccc;
+}
+
+#admin-login-error {
+    color: #ff4a5a;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    display: none;
+}
+
+/* Dashboard Layout */
+.admin-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(400px, 1fr) 1fr;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    background: #111;
+    border-right: 1px solid #222;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #222;
+}
+
+.sidebar-header h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    color: #fff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.sidebar-menu {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.menu-label {
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.menu-btn {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: #ccc;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.menu-btn:hover {
+    background: #222;
+    color: #fff;
+}
+
+.menu-btn.active {
+    background: #222;
+    color: #fff;
+    font-weight: 600;
+    border-left: 3px solid #ff4a5a;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.project-list-item {
+    cursor: pointer;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    color: #999;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project-list-item:hover {
+    background: #1a1a1a;
+    color: #ddd;
+}
+
+.project-list-item.selected {
+    background: #222;
+    color: #fff;
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #222;
+}
+
+/* Editor Pane */
+.admin-editor {
+    background: #0a0a0a;
+    border-right: 1px solid #222;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.editor-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editor-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s;
+}
+
+.action-btn:hover {
+    opacity: 0.8;
+}
+
+.action-btn.primary {
+    background: #fff;
+    color: #000;
+}
+.action-btn.danger {
+    background: #ff4a5a;
+    color: #fff;
+}
+
+/* Tabs */
+.editor-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.tab-btn:hover {
+    color: #fff;
+}
+
+/* Quill Dark Theme Overrides */
+.ql-toolbar.ql-snow, .ql-container.ql-snow {
+    border-color: #333 !important;
+}
+.ql-toolbar.ql-snow {
+    background-color: #1a1a1a;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.ql-container.ql-snow {
+    background-color: #0d0d0d;
+    color: #fff;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+.ql-snow .ql-stroke { stroke: #aaa !important; }
+.ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill { fill: #aaa !important; }
+.ql-snow .ql-picker { color: #aaa !important; }
+.ql-editor.ql-blank::before {
+    color: #666 !important;
+    font-style: normal;
+}
+.ql-editor {
+    min-height: 150px;
+}
+
+.tab-btn.active {
+    color: #ff4a5a;
+    border-bottom-color: #ff4a5a;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 20px;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .4s;
+}
+
+.toggle-switch input:checked + .slider {
+    background-color: #ff4a5a;
+}
+
+.toggle-switch input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.editor-status {
+    padding: 0.5rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/*
+ * OVERRIDE MAIN SITE HIDDEN CURSORS
+ * The main site style.css sets cursor: none to use a custom JS follower.
+ * The Admin dashboard does not load the custom JS follower, so we must restore the native cursor.
+ */
+body, body.admin-body, a, button, input, textarea, select, .action-btn, .project-card, .btn-submit {
+    cursor: auto !important;
+}
+
+a, button, .tab-btn, .action-btn, .project-list-item, .toggle-switch {
+    cursor: pointer !important;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="url"], textarea {
+    cursor: text !important;
+}
+
+.editor-form {
+    padding: 0 2rem 2rem;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.form-group input, 
+.form-group select {
+    background: #111;
+    border: 1px solid #333;
+    padding: 0.8rem;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    border-color: #ff4a5a;
+}
+
+.form-group small {
+    color: #666;
+    font-size: 0.75rem;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #222;
+    margin: 0.5rem 0;
+}
+
+/* Upload Zone */
+.upload-zone {
+    border: 2px dashed #444;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    background: #111;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.upload-zone:hover {
+    border-color: #ff4a5a;
+    background: #151515;
+}
+
+.upload-zone input[type="file"] {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-icon {
+    font-size: 2rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.upload-zone p {
+    color: #999;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Preview Pane */
+.admin-preview {
+    background: #141414; /* Slightly different dark */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.preview-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preview-header h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.preview-badge {
+    background: rgba(255, 74, 90, 0.1);
+    color: #ff4a5a;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.preview-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Isolate the preview grid from the rest */
+#preview-grid {
+    width: 100%;
+    max-width: 600px; /* Keep it constrained for preview */
+}
+
+/* Disable pointer events on preview so they don't click links */
+#preview-grid a {
+    pointer-events: none;
+}
+
+/* Mobile Responsiveness for Dashboard */
+@media (max-width: 1100px) {
+    .admin-layout {
+        grid-template-columns: 250px 1fr;
+    }
+    .admin-preview {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    body.admin-body {
+        overflow: auto;
+        height: auto;
+    }
+    .admin-layout {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+    .admin-sidebar {
+        height: auto;
+        max-height: 40vh;
+        border-right: none;
+        border-bottom: 1px solid #222;
+    }
+    .admin-editor {
+        flex: 1;
+        overflow-y: visible;
+        padding-bottom: 15vh; /* Safety padding for mobile browser nav bars */
+    }
+    .form-split {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}

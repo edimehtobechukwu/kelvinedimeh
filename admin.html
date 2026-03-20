@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Kelvin Edimeh</title>
+    <!-- We load the main style.css to ensure the preview pane renders exactly like the live site -->
+    <link rel="stylesheet" href="/src/style.css">
+    <!-- Quill WYSIWYG Editor Styles -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <!-- Admin specific styles -->
+    <link rel="stylesheet" href="/src/admin.css">
+    <link rel="stylesheet" href="/src/case-study.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+
+    <!-- Login Screen (Shown if not logged in) -->
+    <div id="admin-login-screen" class="admin-login-screen" style="display: none;">
+        <div class="login-box">
+            <h2>Admin Access</h2>
+            <p>Please enter your master password to continue.</p>
+            <input type="password" id="admin-password" placeholder="Password">
+            <button id="admin-login-btn">Secure Login</button>
+            <p id="admin-login-error"></p>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="admin-dashboard-screen" class="admin-layout" style="display: none;">
+        
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h3>Dashboard</h3>
+            </div>
+            
+            <div class="sidebar-menu">
+                <div class="menu-label">CONTENT</div>
+                <button id="btn-add-new" class="menu-btn active"><span class="icon">+</span> Add New Project</button>
+                
+                <div class="menu-label" style="margin-top: 2rem;">YOUR PROJECTS</div>
+                <ul id="project-list" class="project-list">
+                    <!-- Projects injected here -->
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="btn-logout" class="menu-btn">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Editor Pane -->
+        <main class="admin-editor">
+            <div class="editor-header">
+                <div>
+                    <h2 id="editor-title" style="margin-bottom:0.5rem;">New Project</h2>
+                    <div class="editor-tabs">
+                        <button id="tab-cover" class="tab-btn active">Edit Cover</button>
+                        <button id="tab-page" class="tab-btn">Edit Page</button>
+                    </div>
+                </div>
+                <div class="editor-actions">
+                    <button id="btn-delete" class="action-btn danger" style="display: none;">Delete</button>
+                    <button id="btn-save" class="action-btn primary">Save Changes</button>
+                </div>
+            </div>
+            <p id="editor-status" class="editor-status"></p>
+
+            <!-- COVER EDITOR -->
+            <div id="form-cover" class="editor-form">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="p-title" placeholder="Project Name">
+                </div>
+                <div class="form-group">
+                    <label>Subtitle / Description</label>
+                    <input type="text" id="p-subtitle" placeholder="Short description">
+                </div>
+
+                <div class="form-group">
+                    <label>Card Type</label>
+                    <select id="p-type">
+                        <option value="with-actions">With Actions (Hover Buttons)</option>
+                        <option value="internal-route">Internal Route (e.g. /case-study)</option>
+                        <option value="external-link">External Link (Direct click)</option>
+                    </select>
+                </div>
+
+                <div class="form-split">
+                    <div class="form-group">
+                        <label>Live Site URL (Optional)</label>
+                        <input type="text" id="p-live" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>Case Study URL (Optional)</label>
+                        <input type="text" id="p-case" placeholder="/work/...">
+                    </div>
+                </div>
+                
+                <hr>
+
+                <div class="form-group">
+                    <label>Media Source</label>
+                    <select id="p-media-type">
+                        <option value="image">Image</option>
+                        <option value="video">Video (MP4/WebM)</option>
+                    </select>
+                </div>
+
+                <div class="form-group upload-zone" id="upload-zone">
+                    <div class="upload-icon">↑</div>
+                    <p>Click or drag to upload Media</p>
+                    <input type="file" id="p-media-file" accept="image/*,video/mp4,video/webm">
+                </div>
+
+                <!-- Fallback direct URL input -->
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label>Or enter Media URL directly</label>
+                    <input type="text" id="p-media-url" placeholder="https://...">
+                    <small>If Type is Video, enter Video URL. If Image, enter Image URL.</small>
+                </div>
+
+                <div class="form-group" id="video-poster-group" style="display: none; margin-top: 1rem;">
+                    <label>Video Poster Image URL (Optional)</label>
+                    <input type="text" id="p-video-poster" placeholder="Image shown before video plays">
+                </div>
+
+                <hr>
+
+                <div class="form-split">
+                    <div class="form-group">
+                        <label>Display Order</label>
+                        <input type="number" id="p-order" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Img/Video CSS Classes</label>
+                        <input type="text" id="p-class" placeholder="e.g. bg-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE EDITOR (Case Study Builder) -->
+            <div id="form-page" class="editor-form" style="display: none;">
+                <div class="form-group" style="margin-bottom: 1rem; padding: 1rem; background: rgba(255, 74, 90, 0.1); border-radius: 8px;">
+                    <label style="color:#ff4a5a;">Enable Case Study Page?</label>
+                    <small style="color: #ff4a5a; opacity: 0.8; margin-bottom: 0.5rem; display:block;">If enabled, the card's action will automatically route to the dynamically generated page.</small>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="cs-enabled">
+                        <span class="slider"></span> Yes, build actual page
+                    </label>
+                </div>
+
+                <div id="cs-builder" style="opacity: 0.5; pointer-events: none; display: flex; flex-direction: column; gap: 1.5rem;">
+                    <h3>Page Builder</h3>
+                    <p style="font-size:0.85rem; color:#888; margin-top:-10px;">Select blocks and arrange them sequentially to build your dynamic page.</p>
+
+                    <!-- Block Container -->
+                    <div id="cs-blocks-container" style="display:flex; flex-direction:column; gap:1.5rem; border:1px dashed #333; padding:1.5rem; border-radius:12px; min-height:100px;">
+                        
+                    </div>
+
+                    <hr>
+                    <!-- Add Block Controls -->
+                    <div style="background:#111; padding: 1rem; border-radius:12px; border: 1px solid #222;">
+                        <label>Add Content Block</label>
+                        <div style="display:flex; gap:1rem; align-items:center; margin-top:0.5rem;">
+                            <select id="p-add-block-type">
+                                <option value="info-grid">Info Grid (Key/Value Properties)</option>
+                                <option value="hero-image">Hero Visual (Full Width Image)</option>
+                                <option value="content-split">Content Split (Title Left, Details Right)</option>
+                                <option value="text-block">Text Block (Full Width Formatting)</option>
+                                <option value="gallery">Horizontal Gallery (Multiple Images)</option>
+                                <option value="testimonials">Testimonials (Quote Gallery)</option>
+                            </select>
+                            <button type="button" id="btn-add-block" class="btn-primary" style="margin:0; padding:0.6rem 1rem;">+ Add Block</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Live Preview Pane -->
+        <aside class="admin-preview">
+            <div class="preview-header">
+                <h3>Live Preview</h3>
+                <span class="preview-badge">Real-time</span>
+            </div>
+            <div class="preview-container">
+                <!-- We simulate the frontend structure to leverage style.css -->
+                <section class="work-section" style="padding: 0; min-height: unset;">
+                    <div class="project-grid" id="preview-grid" style="grid-template-columns: 1fr; gap: 0;">
+                        <!-- Live preview card injected over here -->
+                    </div>
+                </section>
+            </div>
+        </aside>
+
+    </div>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script type="module" src="/src/admin.ts"></script>
+</body>
+</html>
