@@ -424,7 +424,7 @@ btnAddBlock.addEventListener('click', () => {
 }
 
 // Global Cover Media Upload
-async function handleFileUpload(e: Event, inputElName: string) {
+async function handleFileUpload(e: Event, _inputElName?: string) {
     const target = e.target as HTMLInputElement;
     if (!target.files || target.files.length === 0) return;
     const file = target.files[0];
