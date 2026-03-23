@@ -38,29 +38,75 @@ async function loadCaseStudy() {
     // Update Meta Title
     document.title = `${project.title} - Case Study`;
     
-    // Plain Text to HTML Parser
-    function parseTextToHTML(text: string): string {
+    // Plain Text & Rich Text Auto-Parser
+    function processRichText(text: string): string {
         if (!text) return '';
-        if (text.trim().startsWith('<') && text.trim().endsWith('>')) return text;
+        let html = text;
+        if (!html.trim().startsWith('<')) {
+            const lines = html.split('\n');
+            let out = '';
+            let inList = false;
+            lines.forEach(line => {
+                const t = line.trim();
+                if (t === '') return;
+                if (t.startsWith('- ') || t.startsWith('* ')) {
+                    if (!inList) { out += '<ul class="cs-list" style="margin-top:0.5rem; margin-bottom:1.5rem; display:flex; flex-direction:column; gap:0.5rem;">\n'; inList = true; }
+                    out += `<li><strong style="color:#fff;">${t.substring(2)}</strong></li>\n`;
+                } else {
+                    if (inList) { out += '</ul>\n'; inList = false; }
+                    out += `<p class="cs-text" style="margin-bottom:1rem;">${t}</p>\n`;
+                }
+            });
+            if (inList) out += '</ul>\n';
+            html = out;
+        }
 
-        const lines = text.split('\\n');
-        let html = '';
-        let inList = false;
+        try {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            
+            // Feature: Auto-Split Grid on Double Space (&nbsp; or raw whitespace)
+            Array.from(doc.querySelectorAll('p, h4')).forEach(el => {
+                const inner = el.innerHTML;
+                const match = inner.match(/(?:&nbsp;|\s{2,})(?:\s|&nbsp;)*/);
+                if (match && match.index !== undefined) {
+                    const left = inner.substring(0, match.index).trim();
+                    const right = inner.substring(match.index + match[0].length).trim();
+                    if (left && right) {
+                        const grid = document.createElement('div');
+                        grid.className = 'content-split-clean sub-grid-override';
+                        const cleanLeft = left.replace(/<\/?(?:strong|b|em|i|span|div|a)[^>]*>/gi, '');
+                        grid.innerHTML = `<div class="cs-sidebar" style="margin-bottom:0;"><div class="cs-section-title-clean" style="margin-top:0; color:var(--text); font-size:1.05rem; font-weight:600; letter-spacing:0.02em;">${cleanLeft}</div></div><div class="cs-main-text-clean" style="margin:0;"><p style="margin-top:0; margin-bottom:0;">${right}</p></div>`;
+                        el.parentNode?.replaceChild(grid, el);
+                    }
+                }
+            });
 
-        lines.forEach(line => {
-            const t = line.trim();
-            if (t === '') return;
+            // Feature: Semantic H4 Grid Wrapper (Wraps lists & paragraphs automatically)
+            Array.from(doc.querySelectorAll('h4')).forEach(h4 => {
+                const leftHtml = h4.innerHTML;
+                let next = h4.nextElementSibling;
+                const rightElements: Element[] = [];
+                
+                while (next && next.tagName.toLowerCase() !== 'h4' && !next.classList?.contains('sub-grid-override')) {
+                    rightElements.push(next);
+                    next = next.nextElementSibling;
+                }
+                
+                if (rightElements.length > 0) {
+                    const grid = document.createElement('div');
+                    grid.className = 'content-split-clean sub-grid-override';
+                    grid.innerHTML = `<div class="cs-sidebar" style="margin-bottom:0;"><div class="cs-section-title-clean" style="margin-top:0; color:var(--text); font-size:1.05rem; font-weight:600; letter-spacing:0.02em;">${leftHtml}</div></div><div class="cs-main-text-clean" style="margin:0;"></div>`;
+                    
+                    const rightContainer = grid.querySelector('.cs-main-text-clean');
+                    rightElements.forEach(el => rightContainer?.appendChild(el));
+                    
+                    h4.parentNode?.insertBefore(grid, h4);
+                    h4.remove();
+                }
+            });
 
-            if (t.startsWith('- ') || t.startsWith('* ')) {
-                if (!inList) { html += '<ul class="cs-list" style="margin-top:0.5rem; margin-bottom:1.5rem; display:flex; flex-direction:column; gap:0.5rem;">\\n'; inList = true; }
-                html += `<li><strong style="color:#fff;">${t.substring(2)}</strong></li>\\n`;
-            } else {
-                if (inList) { html += '</ul>\\n'; inList = false; }
-                html += `<p class="cs-text" style="margin-bottom:1rem;">${t}</p>\\n`;
-            }
-        });
-
-        if (inList) html += '</ul>\\n';
+            html = doc.body.innerHTML;
+        } catch(e) {}
         return html;
     }
     
@@ -73,6 +119,21 @@ async function loadCaseStudy() {
         if (cs.hero_url) blocks.push({ type: 'hero-image', data: cs.hero_url });
         if (cs.sections && cs.sections.length > 0) {
             cs.sections.forEach((s: any) => {
+                // Auto-migrate legacy raw HTML Testimonial strings into the new native modular structure on the fly
+                if ((s.title === 'Testimonials' || s.text.includes('gallery-item-clean')) && s.text.includes('cs-text')) {
+                    const doc = new DOMParser().parseFromString(s.text, 'text/html');
+                    const quotes = Array.from(doc.querySelectorAll('.cs-text'));
+                    const authors = Array.from(doc.querySelectorAll('.cs-label-clean'));
+                    if (quotes.length > 0) {
+                        const testData = quotes.map((q: Element, i: number) => ({
+                            quote: q.textContent?.replace(/^"|"$/g, '').trim() || '',
+                            author: authors[i]?.textContent?.trim() || ''
+                        }));
+                        blocks.push({ type: 'testimonials', data: testData });
+                        return; // Bypass the default fallback
+                    }
+                }
+
                 if (s.title === 'Testimonials' || !s.title) blocks.push({ type: 'text-block', data: { text: s.text } });
                 else blocks.push({ type: 'content-split', data: { title: s.title, text: s.text } });
             });
@@ -83,35 +144,93 @@ async function loadCaseStudy() {
     // Generate HTML for Blocks sequentially
     let blocksHtml = blocks.map((b: any) => {
         if (b.type === 'info-grid') {
-            const grid = b.data.map((i: any) => `<div><h5 class="cs-label-clean">${i.label}</h5><p class="cs-value-clean">${i.value}</p></div>`).join('');
-            return `<section class="cs-container-clean" style="margin-bottom:2rem;"><div class="cs-info-grid-clean" style="border-top:none; margin-top:2rem;">${grid}</div></section>`;
+            const grid = b.data.map((i: any) => {
+                if(i.label.toUpperCase() === 'COMPANY' && project.live_url) {
+                    return `<div><h5 class="cs-label-clean">${i.label}</h5><a href="${project.live_url}" target="_blank" class="cs-value-clean" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">${i.value} <span style="font-size:1.1em; line-height:1; transform: translateY(1px);">&#8599;</span></a></div>`
+                }
+                return `<div><h5 class="cs-label-clean">${i.label}</h5><p class="cs-value-clean">${i.value}</p></div>`;
+            }).join('');
+            return `<section class="cs-container-clean" style="margin-bottom:2rem;"><div class="cs-info-grid-clean" style="margin-top:1rem;">${grid}</div></section>`;
         }
         else if (b.type === 'hero-image') {
-            return `<section class="cs-visual" style="padding: 0 5%; max-width: 1400px; margin: 0 auto 5rem; display:block;"><img src="${b.data}" alt="${project.title} Visual" class="cs-hero-img-clean" style="margin-bottom:0;"></section>`;
+            return `<section class="cs-visual" style="padding: 0 5%; max-width: 1400px; margin: 0 auto 5rem; display:block;"><img src="${b.data}" alt="${project.title} Visual" class="cs-hero-img-clean"></section>`;
         }
         else if (b.type === 'content-split') {
             return `
-            <section class="cs-content-clean">
+            <section class="cs-content-wrapper">
                 <div class="content-split-clean">
                     <div class="cs-sidebar"><h3 class="cs-section-title-clean">${b.data.title}</h3></div>
-                    <div class="cs-main-text-clean"><div>${parseTextToHTML(b.data.text)}</div></div>
+                    <div class="cs-main-text-clean">${processRichText(b.data.text)}</div>
                 </div>
             </section>`;
         }
         else if (b.type === 'text-block') {
-             return `<section class="cs-content-clean"><div>${parseTextToHTML(b.data.text)}</div></section>`;
+             return `<section class="cs-content-wrapper"><div class="cs-main-text-clean">${processRichText(b.data.text)}</div></section>`;
         }
         else if (b.type === 'testimonials') {
-             const items = (b.data as any[]).map(r => `
-             <div class="gallery-item-clean" style="flex-direction:column; align-items:flex-start; justify-content:space-between; min-height:150px; flex:0 0 300px; background:#111; padding:2rem; border-radius:16px;">
-                <p class="cs-text" style="color:#fff; font-size:1.1rem; font-style:italic;">"${r.quote}"</p>
-                <p class="cs-label-clean" style="margin-top:2rem; margin-bottom:0;">${r.author}</p>
-             </div>`).join('');
+             const gradients = [
+                 'linear-gradient(135deg, #f4f6fc 0%, #e6ebfa 100%)', // Blueish
+                 'linear-gradient(135deg, #fbf4fb 0%, #f8e5f0 100%)', // Pinkish
+                 'linear-gradient(135deg, #f4fbf8 0%, #e5f6ef 100%)', // Mintish
+                 'linear-gradient(135deg, #fcf4f8 0%, #f6e6ed 100%)', // Roseish
+                 'linear-gradient(135deg, #f8f6fc 0%, #ece5f8 100%)'  // Purplish
+             ];
+             const templateSlides = (b.data as any[]).map(r => {
+                 const grad = gradients[Math.floor(Math.random() * gradients.length)];
+                 return `
+                 <div style="flex:0 0 clamp(350px, 25vw, 450px); background:${grad}; justify-content:flex-start; padding:3.5rem; border-radius:2rem; display:flex; flex-direction:column; margin-right:2vw;">
+                    <p style="font-family: 'Inter', sans-serif; font-size:1.35rem; font-weight:600; color:#111; line-height:1.5; margin-bottom:0;">“${r.quote}”</p>
+                    <div style="margin-top:auto; padding-top:2.5rem;">
+                        <p style="font-family: 'Inter', sans-serif; font-size:1rem; color:#444; font-style:italic;">— ${r.author}</p>
+                    </div>
+                 </div>`;
+             }).join('');
+
+             const set = `<div style="display:flex;">${templateSlides}</div>`;
+             const allSets = set.repeat(10); // 10 identical sets guarantees massive overflow for the infinite scroll
+
              return `
-             <section class="cs-gallery-clean" style="margin-bottom:4rem;">
-                <div class="gallery-grid-clean" style="display:flex; overflow-x:auto; gap:1.5rem; scrollbar-width:none;">
-                    ${items}
+             <section style="overflow: hidden; width: 100%; margin-bottom: 6rem; padding-top: 1rem; cursor: pointer;">
+                <div class="cs-marquee-track">
+                    ${allSets}
                 </div>
+             </section>`;
+        }
+        else if (b.type === 'device-carousel') {
+             const templateSlides = b.data.map((s: any) => `
+                <div class="cs-carousel-slide ${s.device}">
+                    <div class="cs-slide-header">
+                        <h4 class="cs-slide-title">${s.title}</h4>
+                        <p class="cs-slide-text">${s.text}</p>
+                    </div>
+                    <div class="cs-slide-mockup">
+                        ${s.device === 'desktop' ? `
+                            <div class="device-desktop">
+                                <div class="desktop-screen"><img src="${s.image}" alt="${s.title}"></div>
+                                <div class="desktop-stand"></div>
+                            </div>
+                        ` : `
+                            <div class="device-mobile">
+                                <img src="${s.image}" alt="${s.title}">
+                            </div>
+                        `}
+                    </div>
+                </div>
+             `).join('');
+
+             const slides = templateSlides + templateSlides + templateSlides + templateSlides + templateSlides;
+
+             return `
+             <section class="cs-carousel-section" data-carousel-loop="true">
+                 <button class="carousel-nav-btn prev" onclick="this.nextElementSibling.scrollBy({left: -(this.nextElementSibling.firstElementChild.offsetWidth + 48), behavior: 'smooth'})">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="3" fill="none"><path d="M15 18l-6-6 6-6"/></svg>
+                 </button>
+                 <div class="cs-carousel-track" id="cs-track-${Math.random().toString(36).substr(2, 9)}">
+                     ${slides}
+                 </div>
+                 <button class="carousel-nav-btn next" onclick="this.previousElementSibling.scrollBy({left: (this.previousElementSibling.firstElementChild.offsetWidth + 48), behavior: 'smooth'})">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="3" fill="none"><path d="M9 18l6-6-6-6"/></svg>
+                 </button>
              </section>`;
         }
         else if (b.type === 'gallery') {
@@ -124,7 +243,7 @@ async function loadCaseStudy() {
     container.innerHTML = `
         <section class="cs-hero-clean" style="padding-bottom: 0;">
             <div class="cs-container-clean">
-                <div class="cs-category-clean">CASE STUDY</div>
+                <div class="cs-category-clean">${project.type || 'MOBILE APP DESIGN'}</div>
                 <h1 class="cs-title-clean reveal-text" style="opacity:1; transform:translateY(0);">${project.subtitle && project.subtitle.length > 3 ? project.subtitle : project.title}</h1>
             </div>
         </section>
@@ -139,6 +258,15 @@ async function loadCaseStudy() {
                 { scale: 1, opacity: 1, duration: 1.5, ease: 'power3.out' }
             );
         }
+
+        // Auto-center infinite loop carousels deeply into the track safely
+        const loops = document.querySelectorAll('.cs-carousel-section[data-carousel-loop="true"] .cs-carousel-track');
+        loops.forEach((track: any) => {
+            requestAnimationFrame(() => {
+                const offset = track.scrollWidth / 5;
+                track.scrollTo({ left: offset + 1, behavior: 'instant' });
+            });
+        });
     }, 100);
 }
 

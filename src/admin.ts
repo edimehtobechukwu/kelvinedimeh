@@ -174,12 +174,26 @@ function selectProject(proj: any) {
                 csBlocks.push({ type: 'hero-image', data: cs.hero_url });
             }
             if (cs.sections && cs.sections.length > 0) {
-                cs.sections.forEach((s: any) => {
-                    // Treat html-heavy entries as simple text blocks, otherwise split content
-                    if (s.title === 'Testimonials' || !s.title) csBlocks.push({ type: 'text-block', data: { text: s.text } });
-                    else csBlocks.push({ type: 'content-split', data: { title: s.title, text: s.text } });
-                });
-            }
+            cs.sections.forEach((s: any) => {
+                if ((s.title === 'Testimonials' || s.text.includes('gallery-item-clean')) && s.text.includes('cs-text')) {
+                    const doc = new DOMParser().parseFromString(s.text, 'text/html');
+                    const quotes = Array.from(doc.querySelectorAll('.cs-text'));
+                    const authors = Array.from(doc.querySelectorAll('.cs-label-clean'));
+                    if (quotes.length > 0) {
+                        const testData = quotes.map((q: Element, i: number) => ({
+                            quote: q.textContent?.replace(/^"|"$/g, '').trim() || '',
+                            author: authors[i]?.textContent?.trim() || ''
+                        }));
+                        csBlocks.push({ type: 'testimonials', data: testData });
+                        return;
+                    }
+                }
+
+                // Treat html-heavy entries as simple text blocks, otherwise split content
+                if (s.title === 'Testimonials' || !s.title) csBlocks.push({ type: 'text-block', data: { text: s.text } });
+                else csBlocks.push({ type: 'content-split', data: { title: s.title, text: s.text } });
+            });
+        }
             if (cs.gallery && cs.gallery.length > 0) {
                 csBlocks.push({ type: 'gallery', data: cs.gallery });
             }
@@ -312,6 +326,35 @@ function renderCSBlocks() {
                 </div>
             `;
         }
+        else if (block.type === 'device-carousel') {
+             let rowsHtml = (block.data as any[]).map((row, rIdx) => `
+                <div style="display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem; padding:1rem; background:#111; border-radius:8px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h4 style="margin:0; color:#fff; font-size:0.9rem;">Slide ${rIdx + 1}</h4>
+                        <button class="action-btn danger" style="padding:0.3rem 0.6rem; font-size:0.8rem;" onclick="window.deleteBlockRow(${idx}, ${rIdx})">Remove</button>
+                    </div>
+                    <select class="cms-input" onchange="window.updateBlockData(${idx}, 'deviceType', ${rIdx}, this.value)">
+                        <option value="mobile" ${row.device === 'mobile' ? 'selected' : ''}>Mobile App (iPhone)</option>
+                        <option value="desktop" ${row.device === 'desktop' ? 'selected' : ''}>Desktop / Web App</option>
+                    </select>
+                    <input type="text" class="cms-input" placeholder="Phase Title (e.g. ALL-IN-ONE HOMEPAGE)" value="${row.title}" oninput="window.updateBlockData(${idx}, 'deviceTitle', ${rIdx}, this.value)">
+                    <textarea class="cms-input" placeholder="Description..." rows="2" oninput="window.updateBlockData(${idx}, 'deviceText', ${rIdx}, this.value)">${row.text}</textarea>
+                    <div style="display:flex; gap:0.5rem; align-items:center;">
+                        <input type="text" class="cms-input" placeholder="Mockup Image URL" value="${row.image}" oninput="window.updateBlockData(${idx}, 'deviceImage', ${rIdx}, this.value)">
+                        <label class="btn-secondary" style="margin:0; padding:0.6rem; cursor:pointer; flex-shrink:0;">
+                            Upload Img
+                            <input type="file" accept="image/*" style="display:none;" onchange="window.uploadBlockFile(event, ${idx}, 'deviceImage', ${rIdx})">
+                        </label>
+                    </div>
+                </div>
+            `).join('');
+            bodyHtml = `
+                <div style="display:flex; flex-direction:column;">
+                    ${rowsHtml}
+                    <button class="btn-secondary" style="align-self:flex-start; margin-top:0.5rem;" onclick="window.addBlockRow(${idx})">+ Add Slide to Carousel</button>
+                </div>
+            `;
+        }
 
         el.innerHTML = headerHtml + bodyHtml;
         csBlocksContainer.appendChild(el);
@@ -319,12 +362,12 @@ function renderCSBlocks() {
         if (block.type === 'content-split' || block.type === 'text-block') {
             const quill = new Quill(`#quill-editor-${idx}`, {
                 theme: 'snow',
-                modules: { toolbar: [['bold', 'italic', 'underline'], [{'list': 'ordered'}, {'list': 'bullet'}], ['clean']] }
+                modules: { toolbar: [[{'header': [2, 3, 4, false]}], ['bold', 'italic', 'underline'], [{'list': 'ordered'}, {'list': 'bullet'}], ['clean']] }
             });
 
             let contentText = block.type === 'content-split' ? block.data.text : block.data.text;
             if (contentText && !contentText.trim().startsWith('<')) {
-                contentText = parseTextToHTML(contentText);
+                contentText = processRichText(contentText);
             }
             quill.root.innerHTML = contentText || '';
 
@@ -362,6 +405,10 @@ function renderCSBlocks() {
     else if (fieldType === 'galleryUrl') b.data[arrIdx] = val;
     else if (fieldType === 'testQuote') b.data[arrIdx].quote = val;
     else if (fieldType === 'testAuthor') b.data[arrIdx].author = val;
+    else if (fieldType === 'deviceType') b.data[arrIdx].device = val;
+    else if (fieldType === 'deviceTitle') b.data[arrIdx].title = val;
+    else if (fieldType === 'deviceText') b.data[arrIdx].text = val;
+    else if (fieldType === 'deviceImage') b.data[arrIdx].image = val;
     updateLivePreview();
 }
 
@@ -370,6 +417,7 @@ function renderCSBlocks() {
     if (b.type === 'info-grid') b.data.push({label:'', value:''});
     else if (b.type === 'gallery') b.data.push('');
     else if (b.type === 'testimonials') b.data.push({quote:'', author:''});
+    else if (b.type === 'device-carousel') b.data.push({device:'mobile', title:'', text:'', image:''});
     renderCSBlocks();
 }
 
@@ -392,6 +440,7 @@ btnAddBlock.addEventListener('click', () => {
     else if (type === 'text-block') newBlock.data = { text: '' };
     else if (type === 'gallery') newBlock.data = [];
     else if (type === 'testimonials') newBlock.data = [{quote: '', author: ''}];
+    else if (type === 'device-carousel') newBlock.data = [{device: 'mobile', title: '', text: '', image: ''}];
 
     csBlocks.push(newBlock);
     renderCSBlocks();
@@ -399,7 +448,7 @@ btnAddBlock.addEventListener('click', () => {
 });
 
 // File Upload Utility for blocks
-(window as any).uploadBlockFile = async (e: Event, blockIdx: number, targetField: string) => {
+(window as any).uploadBlockFile = async (e: Event, blockIdx: number, targetField: string, arrIdx?: number) => {
     const target = e.target as HTMLInputElement;
     if(!target.files || !target.files[0]) return;
     editorStatus.innerText = 'Uploading asset...';
@@ -414,6 +463,7 @@ btnAddBlock.addEventListener('click', () => {
         let b = csBlocks[blockIdx];
         if (targetField === 'heroUrl') b.data = data.publicUrl;
         else if (targetField === 'gallery') b.data.push(data.publicUrl);
+        else if (targetField === 'deviceImage' && typeof arrIdx === 'number') b.data[arrIdx].image = data.publicUrl;
         
         renderCSBlocks();
         updateLivePreview();
@@ -482,29 +532,75 @@ function generateCardHTML(): string {
     return `<a href="#" class="project-card" style="opacity:1; transform:translateY(0); pointer-events:none;"><div class="card-image">${mediaHTML}</div><div class="card-info"><h3>${title}</h3><p>${subtitle}</p></div></a>`;
 }
 
-// Plain Text to HTML Parser
-function parseTextToHTML(text: string): string {
+// Plain Text & Rich Text Auto-Parser
+function processRichText(text: string): string {
     if (!text) return '';
-    if (text.trim().startsWith('<') && text.trim().endsWith('>')) return text;
+    let html = text;
+    if (!html.trim().startsWith('<')) {
+        const lines = html.split('\n');
+        let out = '';
+        let inList = false;
+        lines.forEach(line => {
+            const t = line.trim();
+            if (t === '') return;
+            if (t.startsWith('- ') || t.startsWith('* ')) {
+                if (!inList) { out += '<ul class="cs-list" style="margin-top:0.5rem; margin-bottom:1.5rem; display:flex; flex-direction:column; gap:0.5rem;">\n'; inList = true; }
+                out += `<li><strong style="color:#fff;">${t.substring(2)}</strong></li>\n`;
+            } else {
+                if (inList) { out += '</ul>\n'; inList = false; }
+                out += `<p class="cs-text" style="margin-bottom:1rem;">${t}</p>\n`;
+            }
+        });
+        if (inList) out += '</ul>\n';
+        html = out;
+    }
 
-    const lines = text.split('\\n');
-    let html = '';
-    let inList = false;
+    try {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        
+        // Feature: Auto-Split Grid on Double Space (&nbsp; or raw whitespace)
+        Array.from(doc.querySelectorAll('p, h4')).forEach(el => {
+            const inner = el.innerHTML;
+            const match = inner.match(/(?:&nbsp;|\s{2,})(?:\s|&nbsp;)*/);
+            if (match && match.index !== undefined) {
+                const left = inner.substring(0, match.index).trim();
+                const right = inner.substring(match.index + match[0].length).trim();
+                if (left && right) {
+                    const grid = document.createElement('div');
+                    grid.className = 'content-split-clean sub-grid-override';
+                    const cleanLeft = left.replace(/<\/?(?:strong|b|em|i|span|div|a)[^>]*>/gi, '');
+                    grid.innerHTML = `<div class="cs-sidebar" style="margin-bottom:0;"><div class="cs-section-title-clean" style="margin-top:0; color:var(--text); font-size:1.05rem; font-weight:600; letter-spacing:0.02em;">${cleanLeft}</div></div><div class="cs-main-text-clean" style="margin:0;"><p style="margin-top:0; margin-bottom:0;">${right}</p></div>`;
+                    el.parentNode?.replaceChild(grid, el);
+                }
+            }
+        });
 
-    lines.forEach(line => {
-        const t = line.trim();
-        if (t === '') return;
+        // Feature: Semantic H4 Grid Wrapper (Wraps lists & paragraphs automatically)
+        Array.from(doc.querySelectorAll('h4')).forEach(h4 => {
+            const leftHtml = h4.innerHTML;
+            let next = h4.nextElementSibling;
+            const rightElements: Element[] = [];
+            
+            while (next && next.tagName.toLowerCase() !== 'h4' && !next.classList?.contains('sub-grid-override')) {
+                rightElements.push(next);
+                next = next.nextElementSibling;
+            }
+            
+            if (rightElements.length > 0) {
+                const grid = document.createElement('div');
+                grid.className = 'content-split-clean sub-grid-override';
+                grid.innerHTML = `<div class="cs-sidebar" style="margin-bottom:0;"><div class="cs-section-title-clean" style="margin-top:0; color:var(--text); font-size:1.05rem; font-weight:600; letter-spacing:0.02em;">${leftHtml}</div></div><div class="cs-main-text-clean" style="margin:0;"></div>`;
+                
+                const rightContainer = grid.querySelector('.cs-main-text-clean');
+                rightElements.forEach(el => rightContainer?.appendChild(el));
+                
+                h4.parentNode?.insertBefore(grid, h4);
+                h4.remove();
+            }
+        });
 
-        if (t.startsWith('- ') || t.startsWith('* ')) {
-            if (!inList) { html += '<ul class="cs-list" style="margin-top:0.5rem; margin-bottom:1.5rem; display:flex; flex-direction:column; gap:0.5rem;">\\n'; inList = true; }
-            html += `<li><strong style="color:#fff;">${t.substring(2)}</strong></li>\\n`;
-        } else {
-            if (inList) { html += '</ul>\\n'; inList = false; }
-            html += `<p class="cs-text" style="margin-bottom:1rem;">${t}</p>\\n`;
-        }
-    });
-
-    if (inList) html += '</ul>\\n';
+        html = doc.body.innerHTML;
+    } catch(e) {}
     return html;
 }
 
@@ -522,17 +618,17 @@ function generatePageHTML(): string {
         }
         else if (b.type === 'content-split') {
             return `
-            <div class="cs-content-clean" style="padding:0; margin-bottom:2rem;">
+            <div class="cs-content-wrapper" style="padding:0; margin-bottom:2rem;">
                 <div class="content-split-clean">
                     <div><h3 class="cs-section-title-clean">${b.data.title}</h3></div>
-                    <div>${parseTextToHTML(b.data.text)}</div>
+                    <div class="cs-main-text-clean">${processRichText(b.data.text)}</div>
                 </div>
             </div>`;
         }
         else if (b.type === 'text-block') {
              return `
-             <div class="cs-content-clean" style="padding:0; margin-bottom:4rem;">
-                <div>${parseTextToHTML(b.data.text)}</div>
+             <div class="cs-content-wrapper" style="padding:0; margin-bottom:4rem;">
+                <div class="cs-main-text-clean">${processRichText(b.data.text)}</div>
              </div>`;
         }
         else if (b.type === 'testimonials') {

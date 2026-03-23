@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- SEO & Meta Tags -->
@@ -76,7 +76,11 @@
             </div>
         </div>
 
-        <div class="nav-right">
+        <div class="nav-right" style="display:flex; align-items:center; gap: 1rem;">
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
             <a href="/contact" class="btn-contact">Let's Talk &rarr;</a>
             <button class="hamburger-btn" aria-label="Menu">
                 <span></span>
@@ -98,20 +102,60 @@
     </div>>
 
     <main>
-        <!-- Hero Section (Bdun Style) -->
-        <section class="hero-bdun">
-            <!-- Center Content -->
-            <div class="hero-center">
-                <h1 class="reveal-text">CRAFTING BOLD<br>DIGITAL EXPERIENCES</h1>
-                <p class="reveal-text">BLENDING STRATEGY & AESTHETICS FOR MEASURABLE IMPACT</p>
+        <!-- Hero Section (Magnetic Interactive Background) -->
+        <section class="hero-mesh">
+            <div id="magnetic-aurora">
+                <div class="m-blob m-blob-1"></div>
+                <div class="m-blob m-blob-2"></div>
+            </div>
+            
+            <div class="hero-mesh-content">
+                <h1 class="hero-type-serif reveal-text">product designer</h1>
+                <p class="hero-type-sub reveal-text">focused on simplifying complex ideas into clear, intuitive digital experiences across brand and product.</p>
+                
+                <a href="#work" class="btn-circle reveal-text">
+                    <div class="circle-icon">&#8595;</div>
+                    VIEW PROJECTS
+                </a>
             </div>
 
-            <!-- Bottom Anchors -->
-            <div class="hero-footer">
-                <div class="anchor-left">BASED IN LAGOS, NIGERIA</div>
-                <div class="anchor-right">KELVIN EDIMEH | BRAND & PRODUCT</div>
-            </div>
+            <!-- Floating 3D UI Graphics -->
+            <div class="hero-graphics">
+                <!-- Main Dashboard Card -->
+                <div class="glass-wrapper gw-1">
+                    <div class="glass-card">
+                        <div class="wire-header">
+                            <div class="wire-circle"></div>
+                            <div class="wire-line w-40"></div>
+                        </div>
+                        <div class="wire-body">
+                            <div class="wire-box"></div>
+                            <div class="wire-box"></div>
+                            <div class="wire-box"></div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Analytics Card -->
+                <div class="glass-wrapper gw-2">
+                    <div class="glass-card">
+                        <div class="wire-line w-60"></div>
+                        <div class="wire-graph">
+                            <div class="bar h-40"></div>
+                            <div class="bar h-80"></div>
+                            <div class="bar h-60"></div>
+                            <div class="bar h-100"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Element Card -->
+                <div class="glass-wrapper gw-3">
+                    <div class="glass-card flex-center">
+                        <div class="wire-toggle"></div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Philosophy / Intro Section (SEO Content) -->

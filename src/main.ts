@@ -7,6 +7,67 @@ import { initCMS } from './cms';
 gsap.registerPlugin(ScrollTrigger);
 initCMS();
 
+// 0. Theme Toggle Logic
+const themeToggleBtn = document.getElementById('theme-toggle');
+const sunIcon = document.getElementById('theme-icon-sun');
+const moonIcon = document.getElementById('theme-icon-moon');
+
+function setTheme(theme: 'light' | 'dark') {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    
+    if (sunIcon && moonIcon) {
+        if (theme === 'dark') {
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        } else {
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+        }
+    }
+}
+
+// Initial Setup
+const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+if (savedTheme) {
+    setTheme(savedTheme);
+} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    setTheme('dark');
+} else {
+    setTheme('light');
+}
+
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+}
+
+// Magnetic Aurora Tracking
+const aurora1 = document.querySelector('.m-blob-1') as HTMLElement;
+const aurora2 = document.querySelector('.m-blob-2') as HTMLElement;
+const heroMesh = document.querySelector('.hero-mesh') as HTMLElement;
+
+if (heroMesh && aurora1 && aurora2) {
+    heroMesh.addEventListener('mousemove', (e) => {
+        const rect = heroMesh.getBoundingClientRect();
+        // Calculate offset from center of hero wrapping bounds for both tracking blooms
+        const xOffset = (e.clientX - rect.left) - (rect.width / 2);
+        const yOffset = (e.clientY - rect.top) - (rect.height / 2);
+
+        aurora1.style.transform = `translate(${xOffset * 0.7}px, ${yOffset * 0.7}px)`;
+        // Second block pushes inward oppositely initially, but we can have it smoothly trail in same direction instead, but slightly inverted for depth
+        aurora2.style.transform = `translate(${xOffset * -0.4}px, ${yOffset * -0.4}px)`;
+    });
+    
+    // Auto-center on leave
+    heroMesh.addEventListener('mouseleave', () => {
+        aurora1.style.transform = `translate(0px, 0px)`;
+        aurora2.style.transform = `translate(0px, 0px)`;
+    });
+}
+
 // Contact Form Handler (Formspree AJAX)
 const contactForm = document.getElementById('contact-form') as HTMLFormElement;
 const formStatus = document.getElementById('form-status') as HTMLElement;
