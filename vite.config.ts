@@ -14,6 +14,8 @@ export default defineConfig({
                 lumenone: resolve(__dirname, 'lumenone.html'),
                 swittea: resolve(__dirname, 'swittea.html'),
                 kml: resolve(__dirname, 'kml.html'),
+                admin: resolve(__dirname, 'admin.html'),
+                casestudy: resolve(__dirname, 'case-study.html'),
             },
         },
     },
