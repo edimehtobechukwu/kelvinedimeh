@@ -412,6 +412,7 @@
 }
 .cs-carousel-track {
     display: flex;
+    justify-content: center;
     gap: 2rem;
     overflow-x: auto;
     padding: 0 max(5vw, calc((100vw - 1200px) / 2));
