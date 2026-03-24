@@ -669,10 +669,15 @@ function generatePageHTML(): string {
                                 <div class="desktop-stand"></div>
                             </div>
                         ` : `
-                            <div class="device-mobile">
-                                <img src="${s.image}" alt="${s.title}">
-                            </div>
-                        `}
+                     <div class="device-mobile" style="position: relative; width: 100%; max-width: 320px; aspect-ratio: 722/1470; margin: 0 auto; overflow: hidden; margin-top: 3rem;">
+                         <div class="app-image-wrap" style="position: absolute; top: 2%; left: 4%; width: 92%; height: 96%; border-radius: 36px; overflow: hidden; z-index: 1;">
+                             <img src="${s.image}" alt="${s.title}" style="width: 100%; height: 100%; display: block; object-fit: cover;">
+                         </div>
+                         <div class="hardware-wrap" style="position: absolute; inset: 0px; z-index: 2; pointer-events: none;">
+                             <img src="https://framerusercontent.com/images/YlYIbfFEujexwgWABDzpsRlY.webp" style="width: 100%; height: 100%; display: block; object-fit: cover;">
+                         </div>
+                     </div>
+                 `}
                     </div>
                 </div>
              `).join('');
