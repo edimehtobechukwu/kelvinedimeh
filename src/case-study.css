@@ -559,6 +559,9 @@
     .carousel-nav-btn.next {
         right: 1vw;
     }
+    .device-mobile {
+        width: 70%; /* Mathematically forces a vertical aspect scale-down to clear the typography above it */
+    }
 }
 
 /* Floating Navigation Buttons matching Framer Screenshot */
