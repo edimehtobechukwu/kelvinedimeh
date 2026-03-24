@@ -558,8 +558,32 @@ function processRichText(text: string): string {
     try {
         const doc = new DOMParser().parseFromString(html, 'text/html');
         
-        // Feature: Auto-Split Grid on Double Space (&nbsp; or raw whitespace)
+        // Feature: Auto-Split Grid on leading Bold Tags OR Double Spaces
         Array.from(doc.querySelectorAll('p, h4')).forEach(el => {
+            if(el.tagName.toLowerCase() === 'p') {
+                const firstNode = el.childNodes[0];
+                if (firstNode && firstNode.nodeType === Node.ELEMENT_NODE && (firstNode as HTMLElement).tagName.toLowerCase() === 'strong') {
+                     const leftHtml = (firstNode as HTMLElement).innerHTML.trim();
+                     if (el.childNodes.length > 1) {
+                        let rightHtml = '';
+                        for(let i=1; i<el.childNodes.length; i++) {
+                            const node = el.childNodes[i];
+                            rightHtml += (node.nodeType === Node.ELEMENT_NODE) ? (node as HTMLElement).outerHTML : node.textContent;
+                        }
+                        rightHtml = rightHtml.replace(/^(?:&nbsp;|\s)+/, '').trim();
+                        
+                        if (rightHtml.length > 0) {
+                            const grid = document.createElement('div');
+                            grid.className = 'content-split-clean sub-grid-override';
+                            grid.innerHTML = `<div class="cs-sidebar" style="margin-bottom:0;"><div class="cs-section-title-clean" style="margin-top:0; color:var(--text); font-size:1.05rem; font-weight:600; letter-spacing:0.02em;">${leftHtml}</div></div><div class="cs-main-text-clean" style="margin:0;"><p style="margin-top:0; margin-bottom:0;">${rightHtml}</p></div>`;
+                            el.parentNode?.replaceChild(grid, el);
+                            return; // Skip double space check for this element
+                        }
+                     }
+                }
+            }
+
+            // Fallback: Double Space Interceptor
             const inner = el.innerHTML;
             const match = inner.match(/(?:&nbsp;|\s{2,})(?:\s|&nbsp;)*/);
             if (match && match.index !== undefined) {
