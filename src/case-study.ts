@@ -212,7 +212,7 @@ async function loadCaseStudy() {
                                 <div class="desktop-stand"></div>
                             </div>
                         ` : `
-                            <div class="device-mobile" style="position: relative; width: 100%; max-width: 320px; aspect-ratio: 722/1470; margin: 0 auto; overflow: hidden;">
+                            <div class="device-mobile" style="position: relative; width: 100%; max-width: 360px; aspect-ratio: 722/1470; margin: 0 auto; overflow: hidden;">
                                 <div class="app-image-wrap" style="position: absolute; top: 2%; left: 4%; width: 92%; height: 96%; border-radius: 36px; overflow: hidden; z-index: 1;">
                                     <img src="${s.image}" alt="${s.title}" style="width: 100%; height: 100%; display: block; object-fit: cover;">
                                 </div>
@@ -266,12 +266,22 @@ async function loadCaseStudy() {
             );
         }
 
-        // Auto-center infinite loop carousels deeply into the track safely
+        // Auto-center and continuously wrap infinite loop carousels naturally
         const loops = document.querySelectorAll('.cs-carousel-section[data-carousel-loop="true"] .cs-carousel-track');
         loops.forEach((track: any) => {
             requestAnimationFrame(() => {
-                const offset = track.scrollWidth / 5;
-                track.scrollTo({ left: offset + 1, behavior: 'instant' });
+                const singleWidth = track.scrollWidth / 5;
+                track.scrollTo({ left: singleWidth * 2, behavior: 'instant' });
+
+                // Silent boundary teleportation wrapper
+                track.addEventListener('scroll', () => {
+                    const currentSetWidth = track.scrollWidth / 5;
+                    if (track.scrollLeft < currentSetWidth * 0.5) {
+                        track.scrollLeft += currentSetWidth * 2;
+                    } else if (track.scrollLeft >= currentSetWidth * 3.5) {
+                        track.scrollLeft -= currentSetWidth * 2;
+                    }
+                }, { passive: true });
             });
         });
     }, 100);

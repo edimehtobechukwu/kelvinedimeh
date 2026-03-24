@@ -445,9 +445,9 @@
 }
 
 .cs-carousel-slide.mobile {
-    width: 380px;
-    min-width: 380px;
-    max-width: 380px;
+    width: 440px;
+    min-width: 440px;
+    max-width: 440px;
     height: auto;
     min-height: 750px;
     padding-top: 3.5rem;
