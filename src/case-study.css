@@ -437,9 +437,12 @@
 
 .cs-carousel-slide.mobile {
     width: 380px;
+    min-width: 380px;
+    max-width: 380px;
     height: auto;
     min-height: 750px;
     padding-top: 3.5rem;
+    align-items: center; /* Enforces strict mathematical horizontal centering of the phone wrapper child */
 }
 
 .cs-carousel-slide.desktop {
@@ -450,10 +453,12 @@
 }
 
 .cs-slide-header {
+    width: 100%;
     padding: 0 3rem;
     margin-bottom: 3.5rem;
     z-index: 2;
     position: relative;
+    box-sizing: border-box; /* Secures physical bounds so 100% fits perfectly inside 380px ignoring child content widths */
 }
 
 .cs-slide-title {
@@ -475,11 +480,13 @@
 }
 
 .cs-slide-mockup {
+    width: 100%;
     margin-top: auto;
     position: relative;
     z-index: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 
@@ -504,11 +511,13 @@
     .cs-carousel-slide.mobile {
         width: 85%;
         min-width: 85%;
+        max-width: 85%;
         height: auto;
         min-height: 600px;
         padding-top: 3rem;
         scroll-snap-align: center;
         border-radius: 32px;
+        align-items: center;
     }
     .cs-carousel-track {
         gap: 5%;
