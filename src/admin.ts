@@ -653,6 +653,43 @@ function generatePageHTML(): string {
                 </div>
             </div>`;
         }
+        else if (b.type === 'device-carousel') {
+             const templateSlides = b.data.map((s: any) => `
+                <div class="cs-carousel-slide ${s.device}">
+                    ${s.title || s.text ? `
+                    <div class="cs-slide-header">
+                        ${s.title ? `<h4 class="cs-slide-title">${s.title}</h4>` : ''}
+                        ${s.text ? `<p class="cs-slide-text">${s.text}</p>` : ''}
+                    </div>
+                    ` : ''}
+                    <div class="cs-slide-mockup">
+                        ${s.device === 'desktop' ? `
+                            <div class="device-desktop">
+                                <div class="desktop-screen"><img src="${s.image}" alt="${s.title}"></div>
+                                <div class="desktop-stand"></div>
+                            </div>
+                        ` : `
+                            <div class="device-mobile">
+                                <img src="${s.image}" alt="${s.title}">
+                            </div>
+                        `}
+                    </div>
+                </div>
+             `).join('');
+
+             return `
+             <section class="cs-carousel-section" style="margin-bottom:2rem;">
+                 <button class="carousel-nav-btn prev" onclick="this.nextElementSibling.scrollBy({left: -(this.nextElementSibling.firstElementChild.offsetWidth + 48), behavior: 'smooth'})">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="3" fill="none"><path d="M15 18l-6-6 6-6"/></svg>
+                 </button>
+                 <div class="cs-carousel-track">
+                     ${templateSlides}
+                 </div>
+                 <button class="carousel-nav-btn next" onclick="this.previousElementSibling.scrollBy({left: (this.previousElementSibling.firstElementChild.offsetWidth + 48), behavior: 'smooth'})">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="3" fill="none"><path d="M9 18l6-6-6-6"/></svg>
+                 </button>
+             </section>`;
+        }
         return '';
     }).join('');
 

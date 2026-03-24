@@ -199,10 +199,12 @@ async function loadCaseStudy() {
         else if (b.type === 'device-carousel') {
              const templateSlides = b.data.map((s: any) => `
                 <div class="cs-carousel-slide ${s.device}">
+                    ${s.title || s.text ? `
                     <div class="cs-slide-header">
-                        <h4 class="cs-slide-title">${s.title}</h4>
-                        <p class="cs-slide-text">${s.text}</p>
+                        ${s.title ? `<h4 class="cs-slide-title">${s.title}</h4>` : ''}
+                        ${s.text ? `<p class="cs-slide-text">${s.text}</p>` : ''}
                     </div>
+                    ` : ''}
                     <div class="cs-slide-mockup">
                         ${s.device === 'desktop' ? `
                             <div class="device-desktop">

@@ -431,3 +431,162 @@
     z-index: 1;
     margin-top: -2px;
 }
+
+/* Advanced Custom Device Carousel & Mockups */
+.cs-carousel-section {
+    padding: 4rem 0 6rem;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+.cs-carousel-track {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding: 0 max(5vw, calc((100vw - 1200px) / 2));
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+.cs-carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.cs-carousel-slide {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+    background: #11131A; /* Match the dark theme screenshot */
+    display: flex;
+    flex-direction: column;
+}
+
+.cs-carousel-slide.mobile {
+    width: 380px;
+    height: 720px;
+    padding-top: 3.5rem;
+}
+
+.cs-carousel-slide.desktop {
+    width: min(80vw, 900px);
+    padding: 4rem;
+    background: #f8f9fa;
+    height: auto;
+}
+
+.cs-slide-header {
+    padding: 0 3rem;
+    margin-bottom: 3.5rem;
+    z-index: 2;
+    position: relative;
+}
+
+.cs-slide-title {
+    color: #FFFFFF;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Syne', sans-serif;
+    margin: 0 0 1.5rem 0;
+}
+
+.cs-slide-text {
+    color: #9BA1B0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.cs-slide-mockup {
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.device-mobile {
+    width: 82%;
+    display: flex;
+}
+.device-mobile img {
+    width: 100%;
+    height: auto;
+    border-radius: 36px 36px 0 0;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.device-desktop {
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+.device-desktop img {
+    width: 100%;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .cs-carousel-slide.mobile {
+        width: 90vw;
+        min-width: 90vw;
+        height: 650px;
+        padding-top: 2.5rem;
+        scroll-snap-align: center;
+    }
+    .cs-carousel-track {
+        gap: 5vw;
+        padding: 0 5vw;
+    }
+    .cs-slide-header {
+        padding: 0 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+    .carousel-nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+    .carousel-nav-btn.prev {
+        left: 1vw;
+    }
+    .carousel-nav-btn.next {
+        right: 1vw;
+    }
+}
+
+/* Floating Navigation Buttons matching Framer Screenshot */
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(200, 205, 215, 0.85); /* Framer Light Grey */
+    border: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+.carousel-nav-btn:hover {
+    background: rgba(180, 185, 195, 1);
+    transform: translateY(-50%) scale(1.05);
+}
+.carousel-nav-btn.prev {
+    left: max(2rem, calc((100vw - 1200px) / 2 - 2rem));
+}
+.carousel-nav-btn.next {
+    right: max(2rem, calc((100vw - 1200px) / 2 - 2rem));
+}
