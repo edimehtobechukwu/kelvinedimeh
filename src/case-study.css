@@ -407,15 +407,15 @@
 .cs-carousel-section {
     padding: 4rem 0 6rem;
     position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    width: 100%;
+    max-width: 1400px; /* Expansive bounded frame allowing navigation arrows to breathe outside the cards */
+    margin: 0 auto;
 }
 .cs-carousel-track {
     display: flex;
     gap: 2rem;
     overflow-x: auto;
     width: 100%;
-    padding: 0 1vw; /* Minimal edge buffer */
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
@@ -435,7 +435,7 @@
 
 .cs-carousel-slide {
     flex: 0 0 auto;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     border-radius: 36px;
     overflow: hidden;
     position: relative;
