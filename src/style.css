@@ -1928,3 +1928,19 @@ textarea,
     top: 4px; right: 4px; width: 24px; height: 24px;
     background: var(--bg); border-radius: 50%;
 }
+
+/* Contra Floating Button */
+.contra-hire-me-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+}
+
+@media (max-width: 768px) {
+    .contra-hire-me-button {
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
