@@ -298,7 +298,7 @@ img {
 
 .hero-mesh-content {
     position: relative;
-    z-index: 1;
+    z-index: 3;
     max-width: 1000px;
 }
 
@@ -311,6 +311,12 @@ img {
     color: var(--text);
     margin-bottom: 2rem;
     text-transform: lowercase;
+}
+
+@media (max-width: 1200px) {
+    .hero-type-serif {
+        font-size: clamp(3rem, 7vw, 6rem);
+    }
 }
 
 .hero-type-sub {
@@ -533,7 +539,7 @@ img {
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid var(--border);
     padding: 1rem 0;
     color: var(--text);
     font-family: var(--font-body);
@@ -550,7 +556,8 @@ img {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--text-muted);
+    opacity: 0.7;
 }
 
 .btn-submit {
@@ -1865,7 +1872,14 @@ textarea,
     pointer-events: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+    .hero-graphics {
+        transform: translateY(-50%) scale(0.75);
+        transform-origin: right center;
+    }
+}
+
+@media (max-width: 900px) {
     .hero-graphics { display: none; }
 }
 
@@ -1929,18 +1943,48 @@ textarea,
     background: var(--bg); border-radius: 50%;
 }
 
-/* Contra Floating Button */
+/* Floating Hire Button (Custom) */
 .contra-hire-me-button {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
     z-index: 9999;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.8rem 1.5rem;
+    border-radius: 100px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.contra-hire-me-button:hover {
+    transform: translateY(-4px) scale(1.02);
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
 }
 
 @media (max-width: 768px) {
     .contra-hire-me-button {
-        bottom: 1rem;
-        right: 1rem;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.8rem;
     }
 }

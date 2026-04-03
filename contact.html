@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -34,6 +34,7 @@
 
         gtag('config', 'G-G7S1DRZ9LT');
     </script>
+    <link rel="stylesheet" href="/src/style.css">
 </head>
 
 <body>
@@ -52,9 +53,28 @@
             </div>
         </div>
 
-        <div class="nav-right">
-            <a href="mailto:&#107;&#101;&#108;&#118;&#105;&#110;&#101;&#100;&#105;&#109;&#101;&#104;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;"
-                class="btn-contact">Let's Talk &rarr;</a>
+        <div class="nav-right" style="display:flex; align-items:center; gap: 1rem;">
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="display:none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="display:block;">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+            <a href="mailto:kelvinedimeh@gmail.com" class="btn-contact">Let's Talk &rarr;</a>
             <button class="hamburger-btn" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -68,10 +88,10 @@
         <nav class="mobile-nav-links">
             <a href="/">Home</a>
             <a href="/work">Work</a>
-            <a href="/about.html">About</a>
+            <a href="/about">About</a>
             <a href="/contact">Let's Talk</a>
         </nav>
-    </div>>
+    </div>
 
     <main class="contact-page">
 
@@ -83,7 +103,7 @@
                     FASHIONABLY LATE ;)</p>
 
                 <p class="reveal-text direct-link">FILL OUT THIS FORM OR EMAIL ME AT <a
-                        href="mailto:&#107;&#101;&#108;&#118;&#105;&#110;&#101;&#100;&#105;&#109;&#101;&#104;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">KELVINEDIMEH@GMAIL.COM</a>
+                        href="mailto:kelvinedimeh@gmail.com">KELVINEDIMEH@GMAIL.COM</a>
                 </p>
 
                 <form class="bdun-form reveal-text" action="https://formspree.io/f/xrealoqv" method="POST"
@@ -95,7 +115,7 @@
                         <input type="email" name="email" placeholder="E-MAIL" required>
                     </div>
                     <div class="form-group">
-                        <textarea name="message" placeholder="MESSAGE" rows="4" required></textarea>
+                        <input type="text" name="message" placeholder="MESSAGE" required>
                     </div>
                     <button type="submit" class="btn-submit">SEND IT!</button>
                     <p id="form-status" class="form-status-msg"></p>
@@ -153,9 +173,8 @@
 
     <script type="module" src="/src/main.ts"></script>
 
-    <!-- Contra Hire Me Button -->
-    <div class="contra-hire-me-button" data-analyticsUserId="863e561d-44e0-4a7a-8bf8-2cf7313c1c32" data-theme="light" data-username="kelvinedimeh"></div>
-    <script async src="https://contra.com/static/embed/sdk.js" charset="utf-8"></script>
+    <!-- Floating Hire Button -->
+    <a href="/contact" class="contra-hire-me-button">Don't hire me on Contra</a>
 </body>
 
 </html>
