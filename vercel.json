@@ -2,6 +2,11 @@
     "cleanUrls": true,
     "redirects": [
         {
+            "source": "/2k26rsvp",
+            "destination": "https://2k26rsvp.kelvinedimeh.me/",
+            "permanent": false
+        },
+        {
             "source": "/:path*",
             "has": [
                 {
