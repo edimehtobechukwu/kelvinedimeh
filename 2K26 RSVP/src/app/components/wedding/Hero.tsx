@@ -54,7 +54,7 @@ export function Hero() {
               textShadow: '0 2px 8px rgba(0,0,0,0.3)'
             }}
           >
-            Kelvin Edimeh
+            Kaine Karibi-George
           </div>
           <div
             className="my-6"
@@ -79,7 +79,7 @@ export function Hero() {
               textShadow: '0 2px 8px rgba(0,0,0,0.3)'
             }}
           >
-            Kaine Karibi-George
+            Kelvin Edimeh
           </div>
         </h1>
 
