@@ -1,11 +1,12 @@
 {
+    "buildCommand": "npm run build && mkdir -p dist/2k26rsvp && cd '2K26 RSVP' && npm install && npm run build && cp -r dist/. ../dist/2k26rsvp/",
+    "outputDirectory": "dist",
     "cleanUrls": true,
+    "rewrites": [
+        { "source": "/2k26rsvp/(.*)", "destination": "/2k26rsvp/index.html" },
+        { "source": "/2k26rsvp", "destination": "/2k26rsvp/index.html" }
+    ],
     "redirects": [
-        {
-            "source": "/2k26rsvp",
-            "destination": "https://2k26rsvp.kelvinedimeh.me/",
-            "permanent": false
-        },
         {
             "source": "/:path*",
             "has": [
