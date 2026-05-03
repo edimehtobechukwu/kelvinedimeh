@@ -7,7 +7,7 @@ export function RSVPForm() {
     fullName: '',
     email: '',
     phone: '',
-    guestCount: '1',
+    guestCount: '0',
     attendWhiteWedding: 'yes',
     attendTraditional: false,
     dietaryRequirements: ''
@@ -232,11 +232,12 @@ export function RSVPForm() {
                   fontWeight: 300
                 }}
               >
-                <option value="1">1 Guest</option>
-                <option value="2">2 Guests</option>
-                <option value="3">3 Guests</option>
-                <option value="4">4 Guests</option>
-                <option value="5">5+ Guests</option>
+                <option value="0">0 — Just me</option>
+                <option value="1">+ 1 Guest (2 total)</option>
+                <option value="2">+ 2 Guests (3 total)</option>
+                <option value="3">+ 3 Guests (4 total)</option>
+                <option value="4">+ 4 Guests (5 total)</option>
+                <option value="5">+ 5 or more Guests</option>
               </select>
             </div>
 
