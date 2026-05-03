@@ -13,7 +13,7 @@ export function Footer() {
               color: '#1e3a8a'
             }}
           >
-            Kaine Karibi-George & Kelvin Edimeh
+            Kaine & Kelvin
           </div>
         </h3>
 
@@ -69,7 +69,7 @@ export function Footer() {
             color: '#94a3b8'
           }}
         >
-          © 2026 Kaine Karibi-George & Kelvin Edimeh
+          © 2026 Kaine & Kelvin
         </p>
       </div>
     </footer>
