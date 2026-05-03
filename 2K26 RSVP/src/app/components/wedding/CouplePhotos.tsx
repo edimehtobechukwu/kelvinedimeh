@@ -18,7 +18,8 @@ export function CouplePhotos() {
     '15.jpg',
   ];
 
-  const photos = momentFiles.map((file) => `/Moments/${file}`);
+  const base = import.meta.env.BASE_URL;
+  const photos = momentFiles.map((file) => `${base}Moments/${file}`);
 
   return (
     <section className="py-24 px-6 bg-gradient-to-b from-blue-50 to-white">

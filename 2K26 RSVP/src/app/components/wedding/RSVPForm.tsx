@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://hdcqgpfpwkkejdgbgbkd.supabase.co';
 
 export function RSVPForm() {
   const [formData, setFormData] = useState({

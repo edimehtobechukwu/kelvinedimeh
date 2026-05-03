@@ -5,7 +5,7 @@ export function Hero() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(/hero.png)',
+          backgroundImage: `url(${import.meta.env.BASE_URL}hero.png)`,
           filter: 'grayscale(100%)',
           zIndex: 0
         }}
