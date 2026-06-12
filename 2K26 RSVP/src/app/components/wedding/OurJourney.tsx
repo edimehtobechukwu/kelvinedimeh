@@ -51,7 +51,7 @@ export function OurJourney() {
               lineHeight: 1.7
             }}
           >
-            Just RSVP and come celebrate with us.
+            We look forward to celebrating with everyone who responded.
           </p>
 
           <div className="pt-8">
@@ -67,7 +67,7 @@ export function OurJourney() {
                 textTransform: 'uppercase'
               }}
             >
-              RSVP Now
+              RSVP Closed
             </a>
           </div>
         </div>

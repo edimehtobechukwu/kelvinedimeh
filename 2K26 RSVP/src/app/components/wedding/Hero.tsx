@@ -141,7 +141,7 @@ export function Hero() {
             textTransform: 'uppercase'
           }}
         >
-          RSVP Now
+          RSVP Closed
         </a>
       </div>
     </section>

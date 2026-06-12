@@ -60,7 +60,7 @@ export function AdditionalInfo() {
                 lineHeight: 1.6
               }}
             >
-              Please RSVP by June 5, 2026. For any questions or special accommodations, feel free to contact us directly.
+              RSVP is now closed (deadline was June 5, 2026). For any questions or special accommodations, feel free to contact us directly.
             </p>
           </div>
         </div>
