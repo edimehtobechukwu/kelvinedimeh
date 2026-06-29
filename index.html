@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kelvin Edimeh - Product Designer</title>
+    <title>Kelvin Edimeh | Senior Product Designer & UI/UX Specialist</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -16,22 +16,21 @@
         rel="stylesheet">
 
     <!-- SEO & Meta Tags -->
-    <meta name="description"
-        content="Kelvin Edimeh is a Product Designer based in Lagos, Nigeria, specializing in crafting bold digital experiences and user-centric interfaces.">
+    <meta name="description" content="Kelvin Edimeh is a Senior Product Designer and UI/UX Designer helping international SaaS, Fintech, and Tech companies design, build, and optimize digital products.">
     <link rel="canonical" href="https://www.kelvinedimeh.me/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.kelvinedimeh.me/">
-    <meta property="og:title" content="Kelvin Edimeh - Product Designer">
-    <meta property="og:description" content="Product Designer based in Lagos, crafting bold digital experiences.">
+    <meta property="og:title" content="Kelvin Edimeh | Senior Product Designer & UI/UX Specialist">
+    <meta property="og:description" content="Kelvin Edimeh is a Senior Product Designer and UI/UX Designer helping international SaaS, Fintech, and Tech companies design, build, and optimize digital products.">
     <meta property="og:image" content="https://www.kelvinedimeh.me/images/og-image.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://www.kelvinedimeh.me/">
-    <meta property="twitter:title" content="Kelvin Edimeh - Product Designer">
-    <meta property="twitter:description" content="Product Designer based in Lagos, crafting bold digital experiences.">
+    <meta property="twitter:title" content="Kelvin Edimeh | Senior Product Designer & UI/UX Specialist">
+    <meta property="twitter:description" content="Kelvin Edimeh is a Senior Product Designer and UI/UX Designer helping international SaaS, Fintech, and Tech companies design, build, and optimize digital products.">
     <meta property="twitter:image" content="https://www.kelvinedimeh.me/images/og-image.jpg">
     <script type="application/ld+json">
     {
@@ -57,6 +56,34 @@
 
         gtag('config', 'G-G7S1DRZ9LT');
     </script>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Kelvin Edimeh | Senior Product Designer & UI/UX Specialist">
+    <meta name="keywords" content="Product Designer, UI/UX Designer, UX Designer, Web Designer, Frontend Developer, Design Systems, SaaS Designer, Fintech Designer, Website Design, Conversion Optimization, Kelvin Edimeh">
+    <meta name="author" content="Kelvin Edimeh">
+    
+    <!-- AEO / SEO Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://www.kelvinedimeh.me/#person",
+          "name": "Kelvin Edimeh",
+          "jobTitle": "Senior Product Designer",
+          "url": "https://www.kelvinedimeh.me",
+          "image": "https://www.kelvinedimeh.me/avatar.png",
+          "sameAs": [
+            "https://www.linkedin.com/in/kelvinedimeh",
+            "https://twitter.com/kelvinedimeh"
+          ],
+          "knowsAbout": ["Product Design", "UI/UX Design", "Frontend Development", "SaaS", "Fintech", "Design Systems"]
+        }
+      ]
+    }
+    </script>
+
 </head>
 
 <body>
@@ -102,58 +129,363 @@
     </div>>
 
     <main>
-        <!-- Hero Section (Magnetic Interactive Background) -->
-        <section class="hero-mesh">
-            <div id="magnetic-aurora">
-                <div class="m-blob m-blob-1"></div>
-                <div class="m-blob m-blob-2"></div>
-            </div>
+                                                                        <!-- New Hero Section Redesign -->
+        <section class="hero-redesign">
             
-            <div class="hero-mesh-content">
-                <h1 class="hero-type-serif reveal-text">product designer</h1>
-                <p class="hero-type-sub reveal-text">focused on simplifying complex ideas into clear, intuitive digital experiences across brand and product.</p>
+            <style>
+                :root {
+                    --orbit-radius-main: 280px;
+                }
+                @media (max-width: 992px) {
+                    :root {
+                        --orbit-radius-main: 160px;
+                    }
+                }
                 
-                <a href="#work" class="btn-circle reveal-text">
-                    <div class="circle-icon">&#8595;</div>
-                    VIEW PROJECTS
-                </a>
-            </div>
+                @keyframes orbit-main {
+                    from { transform: rotate(0deg) translateX(var(--orbit-radius-main)) rotate(0deg); }
+                    to   { transform: rotate(360deg) translateX(var(--orbit-radius-main)) rotate(-360deg); }
+                }
+                @keyframes float-hero {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-20px); }
+                }
+                @keyframes float-shape-1 {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(-15px) rotate(10deg); }
+                }
+                @keyframes float-shape-2 {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(20px) rotate(-15deg); }
+                }
+                
+                .hero-redesign {
+                    position: relative;
+                    min-height: 100vh;
+                    background-color: var(--bg);
+                    color: var(--text);
+                    overflow: visible;
+                    overflow-x: clip;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 80px 5% 0px 5%;
+                    font-family: var(--font-body);
+                    transition: background-color 0.3s ease, color 0.3s ease;
+                }
+                
+                .hero-redesign-container {
+                    position: relative;
+                    z-index: 10;
+                    width: 100%;
+                    max-width: 1200px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 40px;
+                }
+                
+                .hero-glow-bg {
+                    position: absolute;
+                    top: 50%;
+                    right: 0%;
+                    transform: translateY(-50%);
+                    width: 60vw;
+                    height: 80vh;
+                    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+                    border-radius: 50%;
+                    filter: blur(80px);
+                    pointer-events: none;
+                    z-index: 1;
+                }
+                
+                .hero-left-content {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    z-index: 20;
+                    max-width: 500px;
+                }
+                
+                .hero-greeting {
+                    color: var(--text-muted);
+                    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+                    margin-bottom: 0.5rem;
+                }
+                .hero-greeting span { color: var(--accent); font-weight: 600; }
+                
+                .hero-title {
+                    font-family: var(--font-head);
+                    font-size: clamp(3rem, 5vw, 4.5rem);
+                    font-weight: 800;
+                    line-height: 1.15;
+                    margin: 0 0 1rem 0;
+                    letter-spacing: -0.02em;
+                    color: var(--text);
+                }
+                
+                .hero-desc {
+                    color: var(--text-muted);
+                    font-size: clamp(1rem, 1.2vw, 1.125rem);
+                    line-height: 1.6;
+                    max-width: 450px;
+                    margin-bottom: 2.5rem;
+                }
+                
+                .hero-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+                
+                .btn-hire {
+                    background-color: var(--accent);
+                    color: #fff;
+                    padding: 14px 32px;
+                    border-radius: 99px;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 1.1rem;
+                    box-shadow: 0 10px 25px var(--accent-glow);
+                }
+                .btn-hire:hover { filter: brightness(1.1); transform: translateY(-2px); }
+                
+                .btn-icon-mail {
+                    width: 52px;
+                    height: 52px;
+                    border-radius: 50%;
+                    border: 1px solid var(--border);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: transparent;
+                    color: var(--text);
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+                .btn-icon-mail:hover { background: var(--border); }
 
-            <!-- Floating 3D UI Graphics -->
-            <div class="hero-graphics">
-                <!-- Main Dashboard Card -->
-                <div class="glass-wrapper gw-1">
-                    <div class="glass-card">
-                        <div class="wire-header">
-                            <div class="wire-circle"></div>
-                            <div class="wire-line w-40"></div>
-                        </div>
-                        <div class="wire-body">
-                            <div class="wire-box"></div>
-                            <div class="wire-box"></div>
-                            <div class="wire-box"></div>
-                        </div>
+                .hero-right-content {
+                    flex: 1.2;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 80vh;
+                }
+                
+                .hero-orbit-wrapper {
+                    position: relative;
+                    width: 100%;
+                    max-width: 700px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    animation: float-hero 6s ease-in-out infinite;
+                }
+                
+                .avatar-container {
+                    position: relative;
+                    z-index: 10;
+                    width: 100%;
+                    max-width: 500px;
+                }
+                .avatar-container img {
+                    width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
+                }
+                
+                .orbit-ring {
+                    position: absolute;
+                    top: 50%; left: 50%;
+                    transform: translate(-50%, -50%);
+                    border-radius: 50%;
+                    border: 1px dashed rgba(128,128,128,0.25);
+                    opacity: 0.8;
+                    pointer-events: none;
+                }
+                .ring-main { width: calc(var(--orbit-radius-main) * 2); height: calc(var(--orbit-radius-main) * 2); }
+                
+                .orbit-center {
+                    position: absolute;
+                    top: 50%; left: 50%;
+                    width: 0; height: 0;
+                    z-index: 20;
+                }
+                
+                .orbit-icon {
+                    position: absolute;
+                    width: 56px; height: 56px;
+                    margin-top: -28px; margin-left: -28px;
+                    display: flex; align-items: center; justify-content: center;
+                    border-radius: 16px;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                    transition: transform 0.3s ease;
+                }
+                .orbit-icon:hover { transform: scale(1.15) !important; z-index: 30; }
+                
+                /* Elegant Glassmorphic Abstract Shapes */
+                .glass-shape {
+                    position: absolute;
+                    z-index: 5;
+                    backdrop-filter: blur(16px);
+                    -webkit-backdrop-filter: blur(16px);
+                    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 100%);
+                    border: 1px solid rgba(255,255,255,0.3);
+                    box-shadow: 0 25px 45px rgba(0,0,0,0.1), inset 0 0 25px rgba(255,255,255,0.2);
+                    transition: all 0.5s ease;
+                }
+                html[data-theme="dark"] .glass-shape,
+                :root:not([data-theme="light"]) .glass-shape {
+                    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 100%);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    box-shadow: 0 25px 45px rgba(0,0,0,0.3), inset 0 0 25px rgba(255,255,255,0.05);
+                }
+                
+                .shape-1 {
+                    width: clamp(80px, 12vw, 140px);
+                    height: clamp(80px, 12vw, 140px);
+                    border-radius: 50%;
+                    top: 15%;
+                    left: 2%;
+                    animation: float-shape-1 7s ease-in-out infinite;
+                }
+                
+                .shape-2 {
+                    width: clamp(100px, 15vw, 180px);
+                    height: clamp(40px, 6vw, 70px);
+                    border-radius: 40px;
+                    bottom: 20%;
+                    right: 2%;
+                    transform-origin: center;
+                    animation: float-shape-2 8s ease-in-out infinite;
+                }
+                
+                /* Colorful gradient blobs inside the shapes for extra pop */
+                .shape-1::before {
+                    content: '';
+                    position: absolute;
+                    top: 20%; left: 20%;
+                    width: 40%; height: 40%;
+                    background: var(--accent);
+                    border-radius: 50%;
+                    filter: blur(15px);
+                    opacity: 0.6;
+                }
+                .shape-2::before {
+                    content: '';
+                    position: absolute;
+                    top: 50%; right: 10%;
+                    transform: translateY(-50%);
+                    width: 30%; height: 60%;
+                    background: var(--accent);
+                    border-radius: 50%;
+                    filter: blur(15px);
+                    opacity: 0.5;
+                }
+
+                @media (max-width: 992px) {
+                    .hero-redesign-container {
+                        flex-direction: column;
+                        text-align: center;
+                        margin-top: 40px;
+                        gap: 20px;
+                    }
+                    .hero-left-content { 
+                        align-items: center; 
+                        max-width: 100%;
+                    }
+                    .hero-desc { margin-bottom: 2rem; }
+                    .hero-right-content {
+                        min-height: 50vh;
+                        width: 100%;
+                    }
+                    .hero-orbit-wrapper { max-width: 250px; margin-top: 40px; }
+                    
+                    .glass-shape { opacity: 0.6; }
+                    .shape-1 { width: 70px; height: 70px; top: 5%; left: -5%; z-index: -1; }
+                    .shape-2 { width: 100px; height: 40px; bottom: 5%; right: -5%; z-index: -1; }
+                    
+                    .orbit-icon { width: 44px; height: 44px; margin-top: -22px; margin-left: -22px; border-radius: 12px; }
+                    .orbit-icon img { width: 22px !important; height: 22px !important; }
+                }
+            </style>
+            
+            <div class="hero-glow-bg"></div>
+            
+            <!-- Elegant Glassmorphic Floating Shapes -->
+            <div class="glass-shape shape-1"></div>
+            <div class="glass-shape shape-2"></div>
+            
+            <div class="hero-redesign-container">
+                <!-- Left Content -->
+                <div class="hero-left-content">
+                    <p class="hero-greeting">Hey, I am <span>Kelvin</span></p>
+                    <h1 class="hero-title">Product Designer</h1>
+                    <p class="hero-desc">Product Designer who creates intuitive digital experiences and helps companies design, build, and optimize products.</p>
+                    
+                    <div class="hero-actions" style="display: flex; gap: 1rem; align-items: center;">
+                        <a href="#work" class="btn-hire" aria-label="View Kelvin's Portfolio Cases" style="padding: 0 2rem; height: 52px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 14px rgba(15, 113, 102, 0.2); white-space: nowrap;">View Work</a>
+                        <a href="/contact" aria-label="Contact and Hire Kelvin" style="background: var(--surface, #ffffff); color: var(--text, #111111); padding: 0 2rem; height: 52px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 1px solid var(--border, #e5e7eb); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05); white-space: nowrap;">Hire Me</a>
+                    </div>
+                    <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">
+                        <span style="display: flex; gap: -5px;">
+                            <img loading="lazy" src="/avatar.png" alt="Client" style="width:24px; height:24px; border-radius:50%; background:#e0e0e0; border: 2px solid var(--bg);">
+                            <img loading="lazy" src="/icons/antigravity-icon__full-color.png" alt="Client" style="width:24px; height:24px; border-radius:50%; background:#e0e0e0; border: 2px solid var(--bg); margin-left:-10px;">
+                        </span>
+                        Trusted by international startups & SaaS
                     </div>
                 </div>
-
-                <!-- Analytics Card -->
-                <div class="glass-wrapper gw-2">
-                    <div class="glass-card">
-                        <div class="wire-line w-60"></div>
-                        <div class="wire-graph">
-                            <div class="bar h-40"></div>
-                            <div class="bar h-80"></div>
-                            <div class="bar h-60"></div>
-                            <div class="bar h-100"></div>
+                
+                <!-- Right Content -->
+                <div class="hero-right-content">
+                    
+                    <div class="hero-orbit-wrapper">
+                        <!-- Only one ring now -->
+                        <div class="orbit-ring ring-main"></div>
+                        
+                        <div class="avatar-container">
+                            <img loading="lazy" src="/avatar.png" alt="Kelvin Transparent Avatar" id="hero-avatar">
+                        </div>
+                        
+                        <div class="orbit-center">
+                            <!-- All 8 icons on a single ring, evenly spaced over a 32s rotation -->
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: 0s;">
+                                <img loading="lazy" src="/icons/antigravity-icon__full-color.png" alt="Antigravity" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -4s;">
+                                <img loading="lazy" src="/icons/html5.png" alt="HTML5" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -8s;">
+                                <img loading="lazy" src="/icons/css3.webp" alt="CSS3" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -12s;">
+                                <img loading="lazy" src="/icons/JavaScript-logo.png" alt="JavaScript" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -16s;">
+                                <img loading="lazy" src="/icons/claude-ai-icon.webp" alt="Claude" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -20s;">
+                                <img loading="lazy" src="/icons/figma-color.png" alt="Figma" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -24s;">
+                                <img loading="lazy" src="/icons/framer.webp" alt="Framer" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -28s;">
+                                <img loading="lazy" src="/icons/webflow.webp" alt="Webflow" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Interactive Element Card -->
-                <div class="glass-wrapper gw-3">
-                    <div class="glass-card flex-center">
-                        <div class="wire-toggle"></div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -161,11 +493,8 @@
         <!-- Philosophy / Intro Section (SEO Content) -->
         <section class="philosophy-section">
             <div class="philosophy-content">
-                <p class="philosophy-text">
-                    I believe that great <strong>digital experiences</strong> are born at the intersection of bold
-                    aesthetics and rigorous strategy.
-                    As a <strong>Product Designer</strong>, I don't just make things look good. I solve complex problems
-                    with intuitive, <strong>user-centric</strong> solutions.
+                <p class="philosophy-text" style="font-family: var(--font-head); font-size: clamp(1.5rem, 3vw, 2.5rem); max-width: 100%; line-height: 1.4; margin-bottom: 4rem; font-weight: 500;">
+                    I believe that great <strong style="font-weight: 700; color: var(--text);">digital experiences</strong> are born at the intersection of bold aesthetics and rigorous strategy. As a <strong style="font-weight: 700; color: var(--text);">Product Designer</strong>, I don't just make things look good. I solve complex problems with intuitive, <strong style="font-weight: 700; color: var(--text);">user-centric</strong> solutions.
                 </p>
                 <div class="philosophy-grid">
                     <div class="p-item">
@@ -236,7 +565,46 @@
                 </div>
             </div>
         </section>
-    </main>
+    
+<!-- AEO / FAQ Section -->
+<section class="faq-section" id="faq" style="padding: 100px 5%; background-color: var(--surface);">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2 style="font-family: var(--font-head); font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 2rem; text-align: center;">Frequently Asked Questions</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 4rem;">Everything you need to know about my expertise and services.</p>
+        
+        <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 1rem;">
+            <details style="background: var(--bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); cursor: pointer;">
+                <summary style="font-weight: 600; font-size: 1.2rem; outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    Who is Kelvin Edimeh? <span>+</span>
+                </summary>
+                <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">Kelvin Edimeh is a Senior Product Designer and UI/UX Specialist based in Lagos, Nigeria. With extensive experience in creating intuitive digital experiences, Kelvin specializes in helping international SaaS, Fintech, and tech startups design, build, and optimize digital products for growth.</p>
+            </details>
+            
+            <details style="background: var(--bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); cursor: pointer;">
+                <summary style="font-weight: 600; font-size: 1.2rem; outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    What services does Kelvin offer? <span>+</span>
+                </summary>
+                <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">Kelvin offers end-to-end Product Design services including User Interface (UI) Design, User Experience (UX) Design, Design Systems creation, Frontend Development alignment, Website Design, and Conversion Rate Optimization (CRO).</p>
+            </details>
+            
+            <details style="background: var(--bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); cursor: pointer;">
+                <summary style="font-weight: 600; font-size: 1.2rem; outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    What industries does Kelvin work with? <span>+</span>
+                </summary>
+                <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">Kelvin primarily partners with fast-growing international startups, SaaS (Software as a Service) platforms, and Fintech (Financial Technology) companies, though his user-centric design principles apply across all tech-driven industries.</p>
+            </details>
+            
+            <details style="background: var(--bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); cursor: pointer;">
+                <summary style="font-weight: 600; font-size: 1.2rem; outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    How does Kelvin approach product design? <span>+</span>
+                </summary>
+                <p style="margin-top: 1rem; color: var(--text-muted); line-height: 1.6;">Kelvin's approach is deeply rooted in product thinking. Rather than just designing screens, he analyzes business problems, uncovers user needs through research, wireframes solutions, makes data-informed design decisions, and tracks the final impact and results.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+</main>
 
     <!-- Bdun Style Footer Grid -->
     <footer class="bdun-footer">

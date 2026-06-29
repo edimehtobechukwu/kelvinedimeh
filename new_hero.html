@@ -1,0 +1,355 @@
+        <!-- New Hero Section Redesign -->
+        <section class="hero-redesign">
+            
+            <style>
+                :root {
+                    --orbit-radius-main: 280px;
+                }
+                @media (max-width: 992px) {
+                    :root {
+                        --orbit-radius-main: 160px;
+                    }
+                }
+                
+                @keyframes orbit-main {
+                    from { transform: rotate(0deg) translateX(var(--orbit-radius-main)) rotate(0deg); }
+                    to   { transform: rotate(360deg) translateX(var(--orbit-radius-main)) rotate(-360deg); }
+                }
+                @keyframes float-hero {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-20px); }
+                }
+                @keyframes float-shape-1 {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(-15px) rotate(10deg); }
+                }
+                @keyframes float-shape-2 {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(20px) rotate(-15deg); }
+                }
+                
+                .hero-redesign {
+                    position: relative;
+                    min-height: 100vh;
+                    background-color: var(--bg);
+                    color: var(--text);
+                    overflow: visible;
+                    overflow-x: clip;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 80px 5% 0px 5%;
+                    font-family: var(--font-body);
+                    transition: background-color 0.3s ease, color 0.3s ease;
+                }
+                
+                .hero-redesign-container {
+                    position: relative;
+                    z-index: 10;
+                    width: 100%;
+                    max-width: 1200px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 40px;
+                }
+                
+                .hero-glow-bg {
+                    position: absolute;
+                    top: 50%;
+                    right: 0%;
+                    transform: translateY(-50%);
+                    width: 60vw;
+                    height: 80vh;
+                    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+                    border-radius: 50%;
+                    filter: blur(80px);
+                    pointer-events: none;
+                    z-index: 1;
+                }
+                
+                .hero-left-content {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    z-index: 20;
+                    max-width: 500px;
+                }
+                
+                .hero-greeting {
+                    color: var(--text-muted);
+                    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+                    margin-bottom: 0.5rem;
+                }
+                .hero-greeting span { color: var(--accent); font-weight: 600; }
+                
+                .hero-title {
+                    font-family: var(--font-head);
+                    font-size: clamp(3rem, 5vw, 4.5rem);
+                    font-weight: 800;
+                    line-height: 1.15;
+                    margin: 0 0 1rem 0;
+                    letter-spacing: -0.02em;
+                    color: var(--text);
+                }
+                
+                .hero-desc {
+                    color: var(--text-muted);
+                    font-size: clamp(1rem, 1.2vw, 1.125rem);
+                    line-height: 1.6;
+                    max-width: 450px;
+                    margin-bottom: 2.5rem;
+                }
+                
+                .hero-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+                
+                .btn-hire {
+                    background-color: var(--accent);
+                    color: #fff;
+                    padding: 14px 32px;
+                    border-radius: 99px;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 1.1rem;
+                    box-shadow: 0 10px 25px var(--accent-glow);
+                }
+                .btn-hire:hover { filter: brightness(1.1); transform: translateY(-2px); }
+                
+                .btn-icon-mail {
+                    width: 52px;
+                    height: 52px;
+                    border-radius: 50%;
+                    border: 1px solid var(--border);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: transparent;
+                    color: var(--text);
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+                .btn-icon-mail:hover { background: var(--border); }
+
+                .hero-right-content {
+                    flex: 1.2;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 80vh;
+                }
+                
+                .hero-orbit-wrapper {
+                    position: relative;
+                    width: 100%;
+                    max-width: 700px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    animation: float-hero 6s ease-in-out infinite;
+                }
+                
+                .avatar-container {
+                    position: relative;
+                    z-index: 10;
+                    width: 100%;
+                    max-width: 500px;
+                }
+                .avatar-container img {
+                    width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
+                }
+                
+                .orbit-ring {
+                    position: absolute;
+                    top: 50%; left: 50%;
+                    transform: translate(-50%, -50%);
+                    border-radius: 50%;
+                    border: 1px dashed rgba(128,128,128,0.25);
+                    opacity: 0.8;
+                    pointer-events: none;
+                }
+                .ring-main { width: calc(var(--orbit-radius-main) * 2); height: calc(var(--orbit-radius-main) * 2); }
+                
+                .orbit-center {
+                    position: absolute;
+                    top: 50%; left: 50%;
+                    width: 0; height: 0;
+                    z-index: 20;
+                }
+                
+                .orbit-icon {
+                    position: absolute;
+                    width: 56px; height: 56px;
+                    margin-top: -28px; margin-left: -28px;
+                    display: flex; align-items: center; justify-content: center;
+                    border-radius: 16px;
+                    background: var(--surface);
+                    border: 1px solid var(--border);
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                    transition: transform 0.3s ease;
+                }
+                .orbit-icon:hover { transform: scale(1.15) !important; z-index: 30; }
+                
+                /* Elegant Glassmorphic Abstract Shapes */
+                .glass-shape {
+                    position: absolute;
+                    z-index: 5;
+                    backdrop-filter: blur(16px);
+                    -webkit-backdrop-filter: blur(16px);
+                    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 100%);
+                    border: 1px solid rgba(255,255,255,0.3);
+                    box-shadow: 0 25px 45px rgba(0,0,0,0.1), inset 0 0 25px rgba(255,255,255,0.2);
+                    transition: all 0.5s ease;
+                }
+                html[data-theme="dark"] .glass-shape,
+                :root:not([data-theme="light"]) .glass-shape {
+                    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 100%);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    box-shadow: 0 25px 45px rgba(0,0,0,0.3), inset 0 0 25px rgba(255,255,255,0.05);
+                }
+                
+                .shape-1 {
+                    width: clamp(80px, 12vw, 140px);
+                    height: clamp(80px, 12vw, 140px);
+                    border-radius: 50%;
+                    top: 15%;
+                    left: 2%;
+                    animation: float-shape-1 7s ease-in-out infinite;
+                }
+                
+                .shape-2 {
+                    width: clamp(100px, 15vw, 180px);
+                    height: clamp(40px, 6vw, 70px);
+                    border-radius: 40px;
+                    bottom: 20%;
+                    right: 2%;
+                    transform-origin: center;
+                    animation: float-shape-2 8s ease-in-out infinite;
+                }
+                
+                /* Colorful gradient blobs inside the shapes for extra pop */
+                .shape-1::before {
+                    content: '';
+                    position: absolute;
+                    top: 20%; left: 20%;
+                    width: 40%; height: 40%;
+                    background: var(--accent);
+                    border-radius: 50%;
+                    filter: blur(15px);
+                    opacity: 0.6;
+                }
+                .shape-2::before {
+                    content: '';
+                    position: absolute;
+                    top: 50%; right: 10%;
+                    transform: translateY(-50%);
+                    width: 30%; height: 60%;
+                    background: var(--accent);
+                    border-radius: 50%;
+                    filter: blur(15px);
+                    opacity: 0.5;
+                }
+
+                @media (max-width: 992px) {
+                    .hero-redesign-container {
+                        flex-direction: column;
+                        text-align: center;
+                        margin-top: 40px;
+                        gap: 20px;
+                    }
+                    .hero-left-content { 
+                        align-items: center; 
+                        max-width: 100%;
+                    }
+                    .hero-desc { margin-bottom: 2rem; }
+                    .hero-right-content {
+                        min-height: 50vh;
+                        width: 100%;
+                    }
+                    .hero-orbit-wrapper { max-width: 250px; margin-top: 40px; }
+                    
+                    .glass-shape { opacity: 0.6; }
+                    .shape-1 { width: 70px; height: 70px; top: 5%; left: -5%; z-index: -1; }
+                    .shape-2 { width: 100px; height: 40px; bottom: 5%; right: -5%; z-index: -1; }
+                    
+                    .orbit-icon { width: 44px; height: 44px; margin-top: -22px; margin-left: -22px; border-radius: 12px; }
+                    .orbit-icon img { width: 22px !important; height: 22px !important; }
+                }
+            </style>
+            
+            <div class="hero-glow-bg"></div>
+            
+            <!-- Elegant Glassmorphic Floating Shapes -->
+            <div class="glass-shape shape-1"></div>
+            <div class="glass-shape shape-2"></div>
+            
+            <div class="hero-redesign-container">
+                <!-- Left Content -->
+                <div class="hero-left-content">
+                    <p class="hero-greeting">Hey, I am <span>Kelvin</span></p>
+                    <h1 class="hero-title">Product Designer</h1>
+                    <p class="hero-desc">Focused on simplifying complex ideas into clear, intuitive digital experiences across brand and product.</p>
+                    
+                    <div class="hero-actions">
+                        <a href="#work" class="btn-hire">Hire Me</a>
+                        <a href="mailto:kelvinedimeh@gmail.com" class="btn-icon-mail">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right Content -->
+                <div class="hero-right-content">
+                    
+                    <div class="hero-orbit-wrapper">
+                        <!-- Only one ring now -->
+                        <div class="orbit-ring ring-main"></div>
+                        
+                        <div class="avatar-container">
+                            <img src="/avatar.png" alt="Kelvin Transparent Avatar" id="hero-avatar">
+                        </div>
+                        
+                        <div class="orbit-center">
+                            <!-- All 8 icons on a single ring, evenly spaced over a 32s rotation -->
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: 0s;">
+                                <img src="/icons/antigravity-icon__full-color.png" alt="Antigravity" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -4s;">
+                                <img src="/icons/html5.png" alt="HTML5" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -8s;">
+                                <img src="/icons/css3.webp" alt="CSS3" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -12s;">
+                                <img src="/icons/JavaScript-logo.png" alt="JavaScript" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -16s;">
+                                <img src="/icons/claude-ai-icon.webp" alt="Claude" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -20s;">
+                                <img src="/icons/figma-color.png" alt="Figma" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -24s;">
+                                <img src="/icons/framer.webp" alt="Framer" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                            <div class="orbit-icon" style="animation: orbit-main 32s linear infinite; animation-delay: -28s;">
+                                <img src="/icons/webflow.webp" alt="Webflow" style="width:28px;height:28px;object-fit:contain;">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
