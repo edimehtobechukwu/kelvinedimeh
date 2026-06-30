@@ -1413,6 +1413,12 @@ footer {
     font-size: 0.9rem;
 }
 
+/* Hide Mobile Elements on Desktop by Default */
+.mobile-menu,
+.hamburger-btn {
+    display: none;
+}
+
 /* Response */
 @media (max-width: 768px) {
     .hero {
