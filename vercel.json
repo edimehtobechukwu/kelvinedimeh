@@ -1,11 +1,7 @@
 {
-    "buildCommand": "npm run build && mkdir -p dist/2k26rsvp && cd '2K26 RSVP' && npm install && npm run build && cp -r dist/. ../dist/2k26rsvp/",
+    "buildCommand": "npm run build",
     "outputDirectory": "dist",
     "cleanUrls": true,
-    "rewrites": [
-        { "source": "/2k26rsvp/(.*)", "destination": "/2k26rsvp/index.html" },
-        { "source": "/2k26rsvp", "destination": "/2k26rsvp/index.html" }
-    ],
     "redirects": [
         {
             "source": "/:path*",
