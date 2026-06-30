@@ -1997,3 +1997,28 @@ textarea,
         filter: brightness(0) invert(1);
     }
 }
+
+/* Curator Feed Customizations */
+#curator-feed-default-feed-layout {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 4rem 0 0 0 !important;
+    padding: 0 !important;
+}
+#curator-feed-default-feed-layout .crt-feed-window,
+#curator-feed-default-feed-layout .crt-feed,
+#curator-feed-default-feed-layout .crt-widget,
+#curator-feed-default-feed-layout .crt-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+#curator-feed-default-feed-layout .crt-logo,
+#curator-feed-default-feed-layout .crt-tag {
+    color: var(--bg) !important;
+    background-color: transparent !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
