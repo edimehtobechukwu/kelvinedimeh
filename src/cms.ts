@@ -9,9 +9,50 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // --- Fetch & Render Projects ---
+const defaultProjects = [
+  {
+    id: "p1",
+    title: "RentBoss",
+    subtitle: "Property Management & Tenant Portal",
+    image_url: "/images/rentboss-hero.png",
+    media_type: "image",
+    card_type: "internal-route",
+    live_url: "/rentboss.html"
+  },
+  {
+    id: "p2",
+    title: "LumenOne",
+    subtitle: "Fintech Dashboard & Analytics",
+    image_url: "/images/lumen-hero.png",
+    media_type: "image",
+    card_type: "internal-route",
+    live_url: "/lumenone.html"
+  },
+  {
+    id: "p3",
+    title: "SwitTea",
+    subtitle: "E-Commerce Brand Experience",
+    image_url: "/images/swittea-hero.png",
+    media_type: "image",
+    card_type: "internal-route",
+    live_url: "/swittea.html"
+  },
+  {
+    id: "p4",
+    title: "KML Logistics",
+    subtitle: "Logistics & Supply Chain Platform",
+    image_url: "/images/kml-hero.png",
+    media_type: "image",
+    card_type: "internal-route",
+    live_url: "/kml.html"
+  }
+];
+
 export async function renderPortfolio() {
     const grid = document.getElementById('portfolio-grid');
     if (!grid) return;
+
+    let projectList = defaultProjects;
 
     try {
         const { data: projects, error } = await supabase
@@ -19,68 +60,69 @@ export async function renderPortfolio() {
             .select('*')
             .order('display_order', { ascending: true });
 
-        if (error) throw error;
-
-        grid.innerHTML = ''; // clear loading state
-
-        projects.forEach((proj: any) => {
-            const mediaUrl = proj.media_type === 'video' ? proj.video_url : proj.image_url;
-            const imgClass = proj.image_class || (proj.card_type === 'internal-route' ? 'bg-cover project-card-img' : '');
-            
-            let mediaHTML = '';
-            if (proj.media_type === 'video') {
-                mediaHTML = `<video src="${mediaUrl}" poster="${proj.image_url || ''}" class="${imgClass}" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover;"></video>`;
-            } else {
-                mediaHTML = `<img src="${mediaUrl}" alt="${proj.title}" class="${imgClass}">`;
-            }
-
-            if (proj.card_type === 'with-actions') {
-                grid.innerHTML += `
-                <div class="project-card reveal-text" data-id="${proj.id}">
-                    <div class="card-image">
-                        ${mediaHTML}
-                        <object class="card-actions">
-                            ${proj.live_url ? `<a href="${proj.live_url}" target="_blank" rel="noopener noreferrer" class="live-btn">LIVE SITE ↗</a>` : ''}
-                            ${proj.case_study_url ? `<a href="${proj.case_study_url}" target="_blank" rel="noopener noreferrer" class="live-btn case-study-btn">CASE STUDY</a>` : ''}
-                        </object>
-                    </div>
-                    <a href="${proj.case_study_url || proj.live_url || '#'}" target="_blank" rel="noopener noreferrer" class="card-info">
-                        <h3>${proj.title}</h3>
-                        <p>${proj.subtitle}</p>
-                    </a>
-                </div>`;
-            } else if (proj.card_type === 'internal-route') {
-                grid.innerHTML += `
-                <a href="${proj.live_url}" class="project-card reveal-text" data-id="${proj.id}">
-                    <div class="card-image">
-                        ${mediaHTML}
-                    </div>
-                    <div class="card-info">
-                        <h3>${proj.title}</h3>
-                        <p>${proj.subtitle}</p>
-                    </div>
-                </a>`;
-            } else {
-                // external-link
-                grid.innerHTML += `
-                <a href="${proj.live_url}" target="_blank" rel="noopener noreferrer" class="project-card reveal-text" data-id="${proj.id}">
-                    <div class="card-image">${mediaHTML}</div>
-                    <div class="card-info">
-                        <h3>${proj.title}</h3>
-                        <p>${proj.subtitle}</p>
-                    </div>
-                </a>`;
-            }
-        });
-
-        // Ensure elements become visible immediately to avoid blank sections
-        setTimeout(() => {
-            gsap.to(".project-card", { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" });
-        }, 100);
-
+        if (!error && projects && projects.length > 0) {
+            projectList = projects;
+        }
     } catch (err) {
-        grid.innerHTML = '<div style="text-align:center; padding: 2rem;">Error loading projects.</div>';
+        console.warn("Using fallback local projects due to network/Supabase error:", err);
     }
+
+    grid.innerHTML = ''; // clear loading state
+
+    projectList.forEach((proj: any) => {
+        const mediaUrl = proj.media_type === 'video' ? proj.video_url : proj.image_url;
+        const imgClass = proj.image_class || (proj.card_type === 'internal-route' ? 'bg-cover project-card-img' : '');
+        
+        let mediaHTML = '';
+        if (proj.media_type === 'video') {
+            mediaHTML = `<video src="${mediaUrl}" poster="${proj.image_url || ''}" class="${imgClass}" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover;"></video>`;
+        } else {
+            mediaHTML = `<img src="${mediaUrl}" alt="${proj.title}" class="${imgClass}">`;
+        }
+
+        if (proj.card_type === 'with-actions') {
+            grid.innerHTML += `
+            <div class="project-card reveal-text" data-id="${proj.id}">
+                <div class="card-image">
+                    ${mediaHTML}
+                    <object class="card-actions">
+                        ${proj.live_url ? `<a href="${proj.live_url}" target="_blank" rel="noopener noreferrer" class="live-btn">LIVE SITE ↗</a>` : ''}
+                        ${proj.case_study_url ? `<a href="${proj.case_study_url}" target="_blank" rel="noopener noreferrer" class="live-btn case-study-btn">CASE STUDY</a>` : ''}
+                    </object>
+                </div>
+                <a href="${proj.case_study_url || proj.live_url || '#'}" target="_blank" rel="noopener noreferrer" class="card-info">
+                    <h3>${proj.title}</h3>
+                    <p>${proj.subtitle}</p>
+                </a>
+            </div>`;
+        } else if (proj.card_type === 'internal-route') {
+            grid.innerHTML += `
+            <a href="${proj.live_url}" class="project-card reveal-text" data-id="${proj.id}">
+                <div class="card-image">
+                    ${mediaHTML}
+                </div>
+                <div class="card-info">
+                    <h3>${proj.title}</h3>
+                    <p>${proj.subtitle}</p>
+                </div>
+            </a>`;
+        } else {
+            // external-link
+            grid.innerHTML += `
+            <a href="${proj.live_url}" target="_blank" rel="noopener noreferrer" class="project-card reveal-text" data-id="${proj.id}">
+                <div class="card-image">${mediaHTML}</div>
+                <div class="card-info">
+                    <h3>${proj.title}</h3>
+                    <p>${proj.subtitle}</p>
+                </div>
+            </a>`;
+        }
+    });
+
+    // Ensure elements become visible immediately to avoid blank sections
+    setTimeout(() => {
+        gsap.to(".project-card", { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" });
+    }, 100);
 }
 
 // --- Admin CMS ---
