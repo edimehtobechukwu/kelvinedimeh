@@ -4,6 +4,141 @@ const supabaseUrl = 'https://hdcqgpfpwkkejdgbgbkd.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkY3FncGZwd2trZWpkZ2JnYmtkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NjM2MDcsImV4cCI6MjA4OTQzOTYwN30.OksanVRlDMF0OSj7egpj3qxUg1EUg41PfvDnh0_bvYA';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+const fallbackCaseStudies: Record<string, any> = {
+  // RentBoss
+  "d3aab849-1f7c-4a70-a66f-25f9ebcd09b9": {
+    id: "d3aab849-1f7c-4a70-a66f-25f9ebcd09b9",
+    title: "RentBoss",
+    subtitle: "Property Management & Tenant Portal",
+    type: "PROPTECH / SAAS",
+    live_url: "https://www.behance.net/edimehkelvin",
+    case_study_content: {
+      blocks: [
+        {
+          type: "info-grid",
+          data: [
+            { label: "ROLE", value: "Lead Product Designer" },
+            { label: "TIMELINE", value: "3 Months" },
+            { label: "CLIENT", value: "RentBoss Inc." },
+            { label: "SERVICES", value: "UX Research, UI Design, Design System" }
+          ]
+        },
+        { type: "hero-image", data: "/images/rentboss-hero.png" },
+        {
+          type: "content-split",
+          data: {
+            title: "Overview",
+            text: "RentBoss is an end-to-end property management platform designed to streamline communication, rent collection, and maintenance requests between landlords and tenants."
+          }
+        },
+        {
+          type: "gallery",
+          data: ["/images/rentboss-1.png", "/images/rentboss-2.png", "/images/rentboss-3.png"]
+        }
+      ]
+    }
+  },
+  // LumenOne
+  "aea3b4e0-866d-4e3c-8a3f-b696ffd7f184": {
+    id: "aea3b4e0-866d-4e3c-8a3f-b696ffd7f184",
+    title: "LumenOne",
+    subtitle: "Fintech Dashboard & Analytics",
+    type: "FINTECH / ANALYTICS",
+    live_url: "https://www.behance.net/edimehkelvin",
+    case_study_content: {
+      blocks: [
+        {
+          type: "info-grid",
+          data: [
+            { label: "ROLE", value: "Senior UI/UX Designer" },
+            { label: "TIMELINE", value: "2 Months" },
+            { label: "CLIENT", value: "LumenOne Tech" },
+            { label: "SERVICES", value: "Fintech UI, Data Visualization, Web App" }
+          ]
+        },
+        { type: "hero-image", data: "/images/lumen-hero.png" },
+        {
+          type: "content-split",
+          data: {
+            title: "Overview",
+            text: "LumenOne is a high-performance financial analytics and dashboard suite for modern enterprises, providing real-time data insights, KPI monitoring, and transaction tracking."
+          }
+        },
+        {
+          type: "gallery",
+          data: ["/images/lumen-1.png", "/images/lumen-2.png", "/images/lumen-3.png"]
+        }
+      ]
+    }
+  },
+  // SwitTea
+  "a6ee743f-929b-4c29-bc14-9460dd66ccba": {
+    id: "a6ee743f-929b-4c29-bc14-9460dd66ccba",
+    title: "SwitTea",
+    subtitle: "E-Commerce Brand Experience",
+    type: "E-COMMERCE / BRANDING",
+    live_url: "https://www.behance.net/edimehkelvin",
+    case_study_content: {
+      blocks: [
+        {
+          type: "info-grid",
+          data: [
+            { label: "ROLE", value: "Brand & Web Designer" },
+            { label: "TIMELINE", value: "1 Month" },
+            { label: "CLIENT", value: "SwitTea Organics" },
+            { label: "SERVICES", value: "E-Commerce Design, Brand Identity" }
+          ]
+        },
+        { type: "hero-image", data: "/images/swittea-hero.png" },
+        {
+          type: "content-split",
+          data: {
+            title: "Overview",
+            text: "SwitTea is an organic tea brand with a bold, vibrant online shopping experience focused on conversion optimization and immersive visual storytelling."
+          }
+        },
+        {
+          type: "gallery",
+          data: ["/images/swittea-1.png", "/images/swittea-2.png", "/images/swittea-3.png"]
+        }
+      ]
+    }
+  },
+  // KML
+  "2dad7134-97ca-4678-bf30-aca28cece4ff": {
+    id: "2dad7134-97ca-4678-bf30-aca28cece4ff",
+    title: "KML Logistics",
+    subtitle: "Logistics & Supply Chain Platform",
+    type: "LOGISTICS / B2B",
+    live_url: "https://www.behance.net/edimehkelvin",
+    case_study_content: {
+      blocks: [
+        {
+          type: "info-grid",
+          data: [
+            { label: "ROLE", value: "Lead Product Designer" },
+            { label: "TIMELINE", value: "2.5 Months" },
+            { label: "CLIENT", value: "KML Express" },
+            { label: "SERVICES", value: "Supply Chain UX, Order Tracking UI" }
+          ]
+        },
+        { type: "hero-image", data: "/images/kml-hero.png" },
+        {
+          type: "content-split",
+          data: {
+            title: "Overview",
+            text: "KML Logistics is a comprehensive supply chain and shipment tracking platform empowering regional businesses to manage fleet routes, cargo manifests, and warehouse dispatch."
+          }
+        },
+        {
+          type: "gallery",
+          data: ["/images/kml-1.png", "/images/kml-2.png"]
+        }
+      ]
+    }
+  }
+};
+
 async function loadCaseStudy() {
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = (window as any).PROJECT_ID || urlParams.get('id');
@@ -19,13 +154,26 @@ async function loadCaseStudy() {
         return;
     }
 
-    const { data, error } = await supabase
-        .from('portfolio_projects')
-        .select('*')
-        .eq('id', projectId)
-        .single();
+    let project = null;
+    try {
+        const { data, error } = await supabase
+            .from('portfolio_projects')
+            .select('*')
+            .eq('id', projectId)
+            .single();
 
-    if (error || !data) {
+        if (!error && data) {
+            project = data;
+        }
+    } catch (err) {
+        console.warn("Supabase query failed, using local fallback case study:", err);
+    }
+
+    if (!project) {
+        project = fallbackCaseStudies[projectId] || fallbackCaseStudies["d3aab849-1f7c-4a70-a66f-25f9ebcd09b9"];
+    }
+
+    if (!project) {
         container.innerHTML = `<div style="height:60vh; display:flex; align-items:center; justify-content:center; color:#ff4a5a;">
             <h2>Failed to load project</h2>
         </div>`;

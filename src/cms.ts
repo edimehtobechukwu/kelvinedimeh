@@ -11,7 +11,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 // --- Fetch & Render Projects ---
 const defaultProjects = [
   {
-    id: "p1",
+    id: "d3aab849-1f7c-4a70-a66f-25f9ebcd09b9",
     title: "RentBoss",
     subtitle: "Property Management & Tenant Portal",
     image_url: "/images/rentboss-hero.png",
@@ -20,7 +20,7 @@ const defaultProjects = [
     live_url: "/rentboss.html"
   },
   {
-    id: "p2",
+    id: "aea3b4e0-866d-4e3c-8a3f-b696ffd7f184",
     title: "LumenOne",
     subtitle: "Fintech Dashboard & Analytics",
     image_url: "/images/lumen-hero.png",
@@ -29,7 +29,7 @@ const defaultProjects = [
     live_url: "/lumenone.html"
   },
   {
-    id: "p3",
+    id: "a6ee743f-929b-4c29-bc14-9460dd66ccba",
     title: "SwitTea",
     subtitle: "E-Commerce Brand Experience",
     image_url: "/images/swittea-hero.png",
@@ -38,7 +38,7 @@ const defaultProjects = [
     live_url: "/swittea.html"
   },
   {
-    id: "p4",
+    id: "2dad7134-97ca-4678-bf30-aca28cece4ff",
     title: "KML Logistics",
     subtitle: "Logistics & Supply Chain Platform",
     image_url: "/images/kml-hero.png",
