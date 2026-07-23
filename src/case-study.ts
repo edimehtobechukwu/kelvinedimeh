@@ -180,7 +180,6 @@ async function loadCaseStudy() {
         return;
     }
 
-    const project = data;
     const cs = project.case_study_content || {};
 
     // Update Meta Title
